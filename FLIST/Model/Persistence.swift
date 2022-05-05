@@ -13,7 +13,7 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
     
-    static var preview: PersistenceController = {
+    static var itemPreview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         
@@ -25,6 +25,29 @@ struct PersistenceController {
             newItem.quantity = 1.0
             newItem.purchaseDate = .today
             newItem.expiredDate = .tomorrow
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
+    
+    static var shoppingItemPreview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        
+        for index in 0..<10 {
+            let shoppingItem = ShoppingItemModel(context: viewContext)
+            shoppingItem.id = UUID()
+            shoppingItem.name = "Item #\(index)"
+            shoppingItem.priority = .high
+            shoppingItem.isComplete = false
         }
         
         do {

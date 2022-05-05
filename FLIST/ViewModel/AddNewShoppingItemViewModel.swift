@@ -9,11 +9,14 @@ import Foundation
 import Combine
 
 class AddNewShoppingItemViewModel: ObservableObject {
-    // Input
-    @Published var type = ItemCategory.fridge
+    
+    @Published var priority = Priority.normal
     @Published var name = ""
-    @Published var quantity = ""
-    @Published var purchaseDate: Date?
-    @Published var expiredDate: Date?
-    @Published var memo = ""
+    @Published var isComplete = false
+    
+    init(shoppingItemModel: ShoppingItemModel?) {
+        self.priority = shoppingItemModel?.priority ?? .normal
+        self.name = shoppingItemModel?.name ?? ""
+        self.isComplete = shoppingItemModel?.isComplete ?? false
+    }
 }

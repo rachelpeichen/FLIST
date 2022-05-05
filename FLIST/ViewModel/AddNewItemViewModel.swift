@@ -11,7 +11,7 @@ import Combine
 class AddNewItemViewModel: ObservableObject {
     
     // Input
-    @Published var type = ItemCategory.fridge
+    @Published var type = ItemStoreType.fridge
     @Published var name = ""
     @Published var quantity = ""
     @Published var purchaseDate: Date?

@@ -9,7 +9,14 @@
         <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="typeNum" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="ShoppingItemModel" representedClassName=".ShoppingItemModel" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="priorityNum" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <elements>
         <element name="ItemModel" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="ShoppingItemModel" positionX="-63" positionY="36" width="128" height="89"/>
     </elements>
 </model>

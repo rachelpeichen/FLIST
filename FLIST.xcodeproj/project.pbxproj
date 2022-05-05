@@ -24,15 +24,10 @@
 		D174E199281D02A700CEDBC1 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174E198281D02A600CEDBC1 /* Binding+Extension.swift */; };
 		D174E19B281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174E19A281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift */; };
 		D192459027FF165000F22DF5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192458F27FF165000F22DF5 /* SearchBar.swift */; };
-		D192459327FF30DD00F22DF5 /* ShoppingListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192459227FF30DD00F22DF5 /* ShoppingListRow.swift */; };
 		D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA622800639700997AB5 /* ShoppingItemModel.swift */; };
 		D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */; };
 		D194DA6728006AC500997AB5 /* AddNewShoppingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */; };
 		D194DA6928009AA000997AB5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA6828009AA000997AB5 /* BackgroundView.swift */; };
-		D1C0F9D227FE969400E642E1 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9D127FE969400E642E1 /* TabsView.swift */; };
-		D1C0F9D427FEB7F000E642E1 /* FridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9D327FEB7F000E642E1 /* FridgeView.swift */; };
-		D1C0F9D627FEB82C00E642E1 /* FreezerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9D527FEB82C00E642E1 /* FreezerView.swift */; };
-		D1C0F9D827FEB84700E642E1 /* OthersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9D727FEB84700E642E1 /* OthersView.swift */; };
 		D1C0F9DC27FEC3F700E642E1 /* ShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9DB27FEC3F700E642E1 /* ShoppingListView.swift */; };
 		D1C0F9DE27FEC4E000E642E1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9DD27FEC4E000E642E1 /* SettingsView.swift */; };
 		D1C0F9E027FEC82300E642E1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0F9DF27FEC82300E642E1 /* MainView.swift */; };
@@ -76,15 +71,10 @@
 		D174E198281D02A600CEDBC1 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		D174E19A281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewShoppingItemViewModel.swift; sourceTree = "<group>"; };
 		D192458F27FF165000F22DF5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		D192459227FF30DD00F22DF5 /* ShoppingListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListRow.swift; sourceTree = "<group>"; };
 		D194DA622800639700997AB5 /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
 		D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewShoppingItemView.swift; sourceTree = "<group>"; };
 		D194DA6828009AA000997AB5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		D1C0F9D127FE969400E642E1 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
-		D1C0F9D327FEB7F000E642E1 /* FridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeView.swift; sourceTree = "<group>"; };
-		D1C0F9D527FEB82C00E642E1 /* FreezerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerView.swift; sourceTree = "<group>"; };
-		D1C0F9D727FEB84700E642E1 /* OthersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersView.swift; sourceTree = "<group>"; };
 		D1C0F9DB27FEC3F700E642E1 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		D1C0F9DD27FEC4E000E642E1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D1C0F9DF27FEC82300E642E1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -198,9 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				D13177C027FD318B004C6BDC /* ContentView.swift */,
-				D1C0F9D327FEB7F000E642E1 /* FridgeView.swift */,
-				D1C0F9D527FEB82C00E642E1 /* FreezerView.swift */,
-				D1C0F9D727FEB84700E642E1 /* OthersView.swift */,
 				D192459527FF30F800F22DF5 /* Custom */,
 				D192459627FF311400F22DF5 /* Main */,
 				D192459727FF312F00F22DF5 /* Settings */,
@@ -213,8 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				D1C0F9DB27FEC3F700E642E1 /* ShoppingListView.swift */,
-				D192459227FF30DD00F22DF5 /* ShoppingListRow.swift */,
-				D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */,
 				D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */,
 				D194DA6828009AA000997AB5 /* BackgroundView.swift */,
 			);
@@ -224,7 +209,7 @@
 		D192459527FF30F800F22DF5 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				D1C0F9D127FE969400E642E1 /* TabsView.swift */,
+				D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */,
 				D192458F27FF165000F22DF5 /* SearchBar.swift */,
 			);
 			path = Custom;
@@ -396,19 +381,14 @@
 				D174E19B281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift in Sources */,
 				D174E1932819492900CEDBC1 /* AddNewItemViewModel.swift in Sources */,
 				D174E197281CDF5A00CEDBC1 /* NumberFormatter+Extension.swift in Sources */,
-				D192459327FF30DD00F22DF5 /* ShoppingListRow.swift in Sources */,
 				D1C0F9DC27FEC3F700E642E1 /* ShoppingListView.swift in Sources */,
-				D1C0F9D627FEB82C00E642E1 /* FreezerView.swift in Sources */,
 				D174E18D28193D8700CEDBC1 /* Persistence.swift in Sources */,
-				D1C0F9D427FEB7F000E642E1 /* FridgeView.swift in Sources */,
 				D1C0F9E027FEC82300E642E1 /* MainView.swift in Sources */,
 				D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */,
 				D174E199281D02A700CEDBC1 /* Binding+Extension.swift in Sources */,
 				D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */,
 				D1C0F9DE27FEC4E000E642E1 /* SettingsView.swift in Sources */,
-				D1C0F9D827FEB84700E642E1 /* OthersView.swift in Sources */,
 				D1162F452816934800792358 /* AddNewItemView.swift in Sources */,
-				D1C0F9D227FE969400E642E1 /* TabsView.swift in Sources */,
 				D13177C127FD318B004C6BDC /* ContentView.swift in Sources */,
 				D13177BF27FD318B004C6BDC /* FLISTApp.swift in Sources */,
 			);

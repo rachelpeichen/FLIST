@@ -5,94 +5,113 @@
 //  Created by Rachel Chen on 2022/4/8.
 //
 
+// 588 頁現在看到
 import SwiftUI
 
 struct AddNewShoppingItemView: View {
     
-    // MARK: - Parameters
-    @Binding var isShow: Bool
-    // @Binding var shoppingItems: [ShoppingItemModel]
-
-    @State var name: String
-    @State var priority: Priority
-    @State var isEditing = false
+    @Environment(\.managedObjectContext) var context
     
+    @ObservedObject private var addNewShoppingItemViewModel: AddNewShoppingItemViewModel
+    
+    @Binding var isShowing: Bool
+    var newShoppingItem: ShoppingItemModel?
+    
+    init(isShowing: Binding<Bool>, newShoppingItem: ShoppingItemModel? = nil) {
+        self._isShowing = isShowing
+        self.newShoppingItem = newShoppingItem
+        self.addNewShoppingItemViewModel = AddNewShoppingItemViewModel(shoppingItemModel: newShoppingItem)
+    }
+
     var body: some View {
         VStack {
-            
             VStack(alignment: .leading) {
+                
+                // Header Bar
                 HStack {
                     Text("Add a new shopping item")
                         .font(.system(.title, design: .rounded))
+                        .fontWeight(.black)
                         .foregroundColor(.orange)
-                        .bold()
                     
                     Spacer()
                     
                     Button {
-                        self.isShow = false
+                        isShowing = false
                     } label: {
                         Image(systemName: "x.circle.fill")
                             .foregroundColor(.gray)
                             .font(.title)
                     }
                 }
+                .padding(.bottom)
                 
-                TextField("Enter item name", text: $name) { editingChanged in
-                    self.isEditing = editingChanged
-                }
-                .padding()
-                .background(Color(.systemGray5))
-                .cornerRadius(10)
+                // Name TextField
+                FormTextField(name: "Name", placeHolder: "Enter new item name", value: $addNewShoppingItemViewModel.name)
                 
+                // Priority Selection
                 Text("Priority")
-                    .font(.system(.headline, design: .rounded))
-                    .foregroundColor(.secondary)
+                    .font(.system(.subheadline, design: .rounded))
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
                     .padding(.top)
                 
                 HStack {
-                    Text("High")
-                        .font(.system(.headline, design: .rounded))
-                        .padding(10)
-                        .background(priority == .high ? .red : Color(.systemGray4))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .onTapGesture {
-                            self.priority = .high
-                        }
                     
-                    Text("Medium")
-                        .font(.system(.headline, design: .rounded))
-                        .padding(10)
-                        .background(priority == .high ? .orange : Color(.systemGray4))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .onTapGesture {
-                            self.priority = .normal
-                        }
+                    Button {
+                        self.addNewShoppingItemViewModel.priority = .high
+                    } label: {
+                        Text("High")
+                            .lineLimit(1)
+                            .font(.headline)
+                            .foregroundColor(self.addNewShoppingItemViewModel.priority == .high ? Color.white : Color.primary)
+                    }
+                    .padding()
+                    .background(self.addNewShoppingItemViewModel.priority == .high ? Color.red : Color(.systemGray6))
+                    .cornerRadius(10)
                     
-                    Text("Low")
-                        .font(.system(.headline, design: .rounded))
-                        .padding(10)
-                        .background(priority == .high ? .green : Color(.systemGray4))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .onTapGesture {
-                            self.priority = .low
-                        }
+                    Button {
+                        self.addNewShoppingItemViewModel.priority = .normal
+                    } label: {
+                        Text("Normal")
+                            .lineLimit(1)
+                            .font(.headline)
+                            .foregroundColor(self.addNewShoppingItemViewModel.priority == .normal ? Color.white : Color.primary)
+                    }
+                    .padding()
+                    .background(self.addNewShoppingItemViewModel.priority == .normal ? Color.orange : Color(.systemGray6))
+                    .cornerRadius(10)
+                    
+                    Button {
+                        self.addNewShoppingItemViewModel.priority = .low
+                    } label: {
+                        Text("Low")
+                            .lineLimit(1)
+                            .font(.headline)
+                            .foregroundColor(self.addNewShoppingItemViewModel.priority == .low ? Color.white : Color.primary)
+                    }
+                    .padding()
+                    .background(self.addNewShoppingItemViewModel.priority == .low ? Color.green : Color(.systemGray6))
+                    .cornerRadius(10)
                 }
                 .padding(.bottom)
                 
+                // Save Button
                 Button {
-                    self.isShow = false
-                    // add item
+                    self.saveShoppingItem()
+                    self.isShowing = false
+                    // TODO: 有輸入文字再儲存
+//                    if self.$addNewShoppingItemViewModel.name.trimmingCharacters(in: .whitespaces) == "" {
+//                        return
+//                    }
+                    
                 } label: {
                     Text("Save")
                         .font(.system(.headline, design: .rounded))
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(.purple)
+                        .background(.mint)
                         .cornerRadius(10, antialiased: true)
                 }
             }
@@ -101,10 +120,26 @@ struct AddNewShoppingItemView: View {
             .cornerRadius(10, antialiased: true)
         }
     }
+    
+    private func saveShoppingItem() {
+        let newShoppingItem = newShoppingItem ?? ShoppingItemModel(context: context)
+        newShoppingItem.id = UUID()
+        newShoppingItem.name = addNewShoppingItemViewModel.name
+        newShoppingItem.priority = addNewShoppingItemViewModel.priority
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save data \(error.localizedDescription)")
+        }
+    }
 }
 
+// MARK: - Preivew
 struct NewShoppingItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewShoppingItemView(isShow: .constant(true), name: "", priority: .normal)
+        let context = PersistenceController.shared.container.viewContext
+        let previewShoppingItems = ShoppingItemModel(context: context)
+        AddNewShoppingItemView(isShowing: .constant(true), newShoppingItem: previewShoppingItems)
     }
 }

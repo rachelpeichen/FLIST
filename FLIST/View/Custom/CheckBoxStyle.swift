@@ -14,7 +14,7 @@ struct CheckboxStyle: ToggleStyle {
             Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 24, height: 24)
-                .foregroundColor(configuration.isOn ? .orange : .gray)
+                .foregroundColor(configuration.isOn ? .orange : Color(.lightGray))
                 .font(.system(size: 20, weight: .bold, design: .default))
                 .onTapGesture {
                     configuration.isOn.toggle()

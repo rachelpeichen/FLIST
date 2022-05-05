@@ -8,11 +8,16 @@
 import SwiftUI
 import CoreData
 
-enum ItemDisplayType {
+enum ItemStoreDisplayType {
     case all
     case fridge
     case freezer
     case others
+}
+
+enum ItemCategory {
+    case veg
+    case fruit
 }
 
 struct MainView: View {
@@ -21,11 +26,13 @@ struct MainView: View {
     
     @FetchRequest(
         entity: ItemModel.entity(),
-        sortDescriptors: [ NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: false)])
+        sortDescriptors: [NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: false)]
+    )
+    
     var items: FetchedResults<ItemModel>
     
     private var itemDataForView: [ItemModel] {
-        switch displayType {
+        switch storeDisplayType {
         case .all:
             return items
                 .sorted { $0.expiredDate ?? .tenYear < $1.expiredDate ?? .tenYear }
@@ -44,16 +51,12 @@ struct MainView: View {
         }
     }
     
-    @State private var displayType: ItemDisplayType = .all
+    @State private var storeDisplayType: ItemStoreDisplayType = .all
     @State private var selectedItem: ItemModel?
-    @State private var showingAddItemPage = false
-    @State private var showingEditItemPage = false
-    //    @State private var selectedTab: Int = 0
+    @State private var showingAddItemView = false
+    @State private var showingEditItemView = false
+    // TODO: 搜尋功能
     @State var searchQuery = ""
-    
-    //    let tabs: [Tab] = [.init(title: "Fridge"),
-    //                       .init(title: "Freezer"),
-    //                       .init(title: "Others")]
     
     var body: some View {
         VStack {
@@ -67,13 +70,13 @@ struct MainView: View {
                 Spacer()
                 
                 Button {
-                    showingAddItemPage.toggle()
+                    showingAddItemView.toggle()
                 } label : {
                     Image(systemName: "plus.circle.fill")
                         .foregroundColor(.orange)
                         .font(.title)
                 }
-                .sheet(isPresented: $showingAddItemPage) {
+                .sheet(isPresented: $showingAddItemView) {
                     AddNewItemView(newItem: nil)
                 }
             }
@@ -82,35 +85,31 @@ struct MainView: View {
             SearchBar(text: $searchQuery)
                 .padding(.bottom)
             
-            DisplayTypeBar(displayType: $displayType)
+            DisplayTypeBar(displayType: $storeDisplayType)
             
-            //            ScrollView(showsIndicators: false) {
+            // 蔬菜啥的分類
             
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(1...10, id: \.self) { _ in
+                        CategoryCellView(name: "Vegetables")
+                    }
+                }
+            }
+         
             ScrollView {
                 ForEach(itemDataForView) { item in
                     ItemCellView(item: item)
                         .onTapGesture {
-                            self.showingEditItemPage = true
+                            self.showingEditItemView = true
                             self.selectedItem = item
                         }
                 }
-                .sheet(isPresented: self.$showingEditItemPage) {
+                .sheet(isPresented: self.$showingEditItemView) {
                     AddNewItemView(newItem: self.selectedItem, showDeleteButton: true)
                         .environment(\.managedObjectContext, self.context)
                 }
             }
-            
-            //            }
-            
-            // 好像不需要這樣 可以把 Tabs View 拆掉
-            //                TabsView(tabs:  tabs, geoWidth: geo.size.width, selectedTab: $selectedTab)
-            //
-            //                TabView(selection: $selectedTab) {
-            //                    FridgeView().tag(0)
-            //                    FreezerView().tag(1)
-            //                    OthersView().tag(2)
-            //                }
-            //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
     }
 }
@@ -119,7 +118,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        
         let context = PersistenceController.shared.container.viewContext
         let previewItem = ItemModel(context: context)
         previewItem.itemId = UUID()
@@ -129,7 +127,7 @@ struct MainView_Previews: PreviewProvider {
         previewItem.expiredDate = .tomorrow
         
         return Group {
-            MainView().environment(\.managedObjectContext, context)
+            MainView().environment(\.managedObjectContext, PersistenceController.itemPreview.container.viewContext)
             DisplayTypeBar(displayType: .constant(.all)).previewLayout(.sizeThatFits)
             ItemCellView(item: previewItem).previewLayout(.sizeThatFits)
         }
@@ -140,48 +138,63 @@ struct MainView_Previews: PreviewProvider {
 
 struct DisplayTypeBar: View {
     
-    @Binding var displayType: ItemDisplayType
+    @Binding var displayType: ItemStoreDisplayType
     
     var body: some View {
         VStack {
             HStack(spacing: 10) {
                 Group {
-                    Text("All")
-                        .padding(5)
-                        .padding(.horizontal, 15)
-                        .background(displayType == .all ? .orange : .gray)
-                        .onTapGesture {
-                            self.displayType = .all
-                        }
+                    VStack {
+                        Text("All")
+                            .minimumScaleFactor(0.8)
+                            .foregroundColor(displayType == .all ? .orange : .gray)
+                            .onTapGesture {
+                                self.displayType = .all
+                            }
+                        
+                        Rectangle()
+                            .fill(displayType == .all ? .orange : .white)
+                            .frame(height: 1)
+                    }
                     
-                    Text("Fridge")
-                        .padding(5)
-                        .padding(.horizontal, 15)
-                        .background(displayType == .fridge ? .orange : .gray)
-                        .onTapGesture {
-                            self.displayType = .fridge
+                    VStack {
+                        Text("Fridge")
+                            .minimumScaleFactor(0.8)
+                            .foregroundColor(displayType == .fridge ? .orange : .gray)
+                            .onTapGesture {
+                                self.displayType = .fridge
                         }
+                        
+                        Rectangle().fill(displayType == .fridge ? .orange : .white).frame(height: 1)
+                    }
                     
-                    Text("Freezer")
-                        .padding(5)
-                        .padding(.horizontal, 15)
-                        .background(displayType == .freezer ? .orange : .gray)
-                        .onTapGesture {
-                            self.displayType = .freezer
+                    VStack {
+                        Text("Freezer")
+                            .minimumScaleFactor(0.8)
+                            .foregroundColor(displayType == .freezer ? .orange : .gray)
+                            .onTapGesture {
+                                self.displayType = .freezer
                         }
+                        
+                        Rectangle().fill(displayType == .freezer ? .orange : .white).frame(height: 1)
+                    }
                     
-                    Text("Others")
-                        .padding(5)
-                        .padding(.horizontal, 15)
-                        .background(displayType == .others ? .orange : .gray)
-                        .onTapGesture {
-                            self.displayType = .others
+                    VStack {
+                        Text("Others")
+                            .minimumScaleFactor(0.8)
+                            .foregroundColor(displayType == .others ? .orange : .gray)
+                            .onTapGesture {
+                                self.displayType = .others
                         }
+                        
+                        Rectangle().fill(displayType == .others ? .orange : .white).frame(height: 1)
+                    }
                 }
+                .lineLimit(1)
                 .font(.system(.subheadline, design: .rounded))
-                .foregroundColor(.white)
-                .cornerRadius(15)
+                
             }
+            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             .frame(maxWidth: .infinity)
         }
     }
@@ -218,5 +231,24 @@ struct ItemCellView: View {
             }
         }
         .padding()
+    }
+}
+
+
+struct CategoryCellView: View {
+    let name: String
+    var body: some View {
+        VStack {
+            Text(name)
+                .font(.system(.subheadline, design: .rounded))
+                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                .background(Color.mint)
+                .cornerRadius(20)
+                .frame(height: 40)
+                .onTapGesture {
+                    
+                }
+        }
+        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
     }
 }

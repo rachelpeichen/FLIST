@@ -63,7 +63,7 @@ struct AddNewItemView: View {
                 
                 // Category Selection
                 VStack(alignment: .leading) {
-                    Text("CATEGORY")
+                    Text("Category")
                         .font(.system(.subheadline, design: .rounded))
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -110,7 +110,7 @@ struct AddNewItemView: View {
                 .padding(.top)
                 
                 // Amount Textfield
-                FormAmountField(name: "AMOUNT", placeHolder: "1", value: $addNewItemViewModel.quantity)
+                FormAmountField(name: "Amount", placeHolder: "1", value: $addNewItemViewModel.quantity)
                     .padding(.top)
                 
                 // Dates
@@ -237,7 +237,7 @@ struct FormTextField: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name.uppercased())
+            Text(name)
                 .font(.system(.subheadline, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
@@ -262,7 +262,7 @@ struct FormAmountField: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name.uppercased())
+            Text(name)
                 .font(.system(.subheadline, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
@@ -296,7 +296,7 @@ struct FormDateField: View {
     var body: some View {
         VStack {
             HStack() {
-                Text(name.uppercased())
+                Text(name)
                     .font(.system(.subheadline, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
@@ -327,7 +327,7 @@ struct FormTextEditor: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name.uppercased())
+            Text(name)
                 .font(.system(.subheadline, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
