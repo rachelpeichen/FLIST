@@ -10,14 +10,9 @@ import CoreData
 
 enum ItemStoreDisplayType {
     case all
-    case fridge
-    case freezer
+    case vegs
+    case fruits
     case others
-}
-
-enum ItemCategory {
-    case veg
-    case fruit
 }
 
 struct MainView: View {
@@ -29,6 +24,7 @@ struct MainView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: false)]
     )
     
+    //@State var selectedCategories: Set<ItemCategory> = Set()
     var items: FetchedResults<ItemModel>
     
     private var itemDataForView: [ItemModel] {
@@ -36,17 +32,17 @@ struct MainView: View {
         case .all:
             return items
                 .sorted { $0.expiredDate ?? .tenYear < $1.expiredDate ?? .tenYear }
-        case .fridge:
+        case .vegs:
             return items
-                .filter { $0.type == .fridge }
+                .filter { $0.category == .vegetables }
                 .sorted { $0.expiredDate ?? .tenYear < $1.expiredDate ?? .tenYear }
-        case .freezer:
+        case .fruits:
             return items
-                .filter { $0.type == .freezer }
+                .filter { $0.category == .fruits }
                 .sorted { $0.expiredDate ?? .tenYear < $1.expiredDate ?? .tenYear }
         case .others:
             return items
-                .filter { $0.type == .others }
+                .filter { $0.category == .others }
                 .sorted { $0.expiredDate ?? .tenYear < $1.expiredDate ?? .tenYear }
         }
     }
@@ -87,19 +83,13 @@ struct MainView: View {
             
             DisplayTypeBar(displayType: $storeDisplayType)
             
-            // 蔬菜啥的分類
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(1...10, id: \.self) { _ in
-                        CategoryCellView(name: "Vegetables")
-                    }
-                }
-            }
+            // TODO: - 蔬菜啥的分類 抄expense tracker 那個看看？？？
+            //ItemCategoryFilterView(selectedCategories: <#T##Binding<Set<ItemCategory>>#>)
+
          
             ScrollView {
                 ForEach(itemDataForView) { item in
-                    ItemCellView(item: item)
+                    ItemCellView(category: item.category, item: item)
                         .onTapGesture {
                             self.showingEditItemView = true
                             self.selectedItem = item
@@ -129,7 +119,7 @@ struct MainView_Previews: PreviewProvider {
         return Group {
             MainView().environment(\.managedObjectContext, PersistenceController.itemPreview.container.viewContext)
             DisplayTypeBar(displayType: .constant(.all)).previewLayout(.sizeThatFits)
-            ItemCellView(item: previewItem).previewLayout(.sizeThatFits)
+            ItemCellView(category: .fruits, item: previewItem).previewLayout(.sizeThatFits)
         }
     }
 }
@@ -158,25 +148,25 @@ struct DisplayTypeBar: View {
                     }
                     
                     VStack {
-                        Text("Fridge")
+                        Text("Vegs")
                             .minimumScaleFactor(0.8)
-                            .foregroundColor(displayType == .fridge ? .orange : .gray)
+                            .foregroundColor(displayType == .vegs ? .orange : .gray)
                             .onTapGesture {
-                                self.displayType = .fridge
+                                self.displayType = .vegs
                         }
                         
-                        Rectangle().fill(displayType == .fridge ? .orange : .white).frame(height: 1)
+                        Rectangle().fill(displayType == .vegs ? .orange : .white).frame(height: 1)
                     }
                     
                     VStack {
-                        Text("Freezer")
+                        Text("Fruits")
                             .minimumScaleFactor(0.8)
-                            .foregroundColor(displayType == .freezer ? .orange : .gray)
+                            .foregroundColor(displayType == .fruits ? .orange : .gray)
                             .onTapGesture {
-                                self.displayType = .freezer
+                                self.displayType = .fruits
                         }
                         
-                        Rectangle().fill(displayType == .freezer ? .orange : .white).frame(height: 1)
+                        Rectangle().fill(displayType == .fruits ? .orange : .white).frame(height: 1)
                     }
                     
                     VStack {
@@ -202,6 +192,8 @@ struct DisplayTypeBar: View {
 
 struct ItemCellView: View {
     
+    let category: ItemCategory
+    
     @ObservedObject var item: ItemModel
     
     var body: some View {
@@ -212,9 +204,14 @@ struct ItemCellView: View {
                 EmptyView()
                 
             }  else {
-                Image(systemName: "bag.circle.fill")
-                    .font(.title)
-                    .foregroundColor(.orange)
+                Image(category.icon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20, height: 20)
+                    .padding(.all, 8)
+                    .foregroundColor(category.color)
+                    .background(category.color.opacity(0.1))
+                    .cornerRadius(18)
                 
                 VStack(alignment: .leading) {
                     Text(item.name)
@@ -231,24 +228,5 @@ struct ItemCellView: View {
             }
         }
         .padding()
-    }
-}
-
-
-struct CategoryCellView: View {
-    let name: String
-    var body: some View {
-        VStack {
-            Text(name)
-                .font(.system(.subheadline, design: .rounded))
-                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-                .background(Color.mint)
-                .cornerRadius(20)
-                .frame(height: 40)
-                .onTapGesture {
-                    
-                }
-        }
-        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
     }
 }

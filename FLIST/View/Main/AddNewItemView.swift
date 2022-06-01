@@ -13,6 +13,8 @@ struct AddNewItemView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject private var addNewItemViewModel: AddNewItemViewModel
+    @State var isNavigationLinkActive = false
+    
     var showingDeleteButton: Bool = false
     var newItem: ItemModel?
     
@@ -20,149 +22,122 @@ struct AddNewItemView: View {
         self.newItem = newItem
         self.addNewItemViewModel = AddNewItemViewModel(itemModel: newItem)
         self.showingDeleteButton = showDeleteButton
+        
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemMint, .font: UIFont(name: "ArialRoundedMTBold", size: 30)!]
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
     }
-    
+
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true) {
+        
+        
+        NavigationView {
             
-            VStack {
+            ScrollView(.vertical, showsIndicators: true) {
                 
-                // Title Bar
-                HStack(alignment: .lastTextBaseline) {
-                    Text("New Item")
-                        .font(.system(.largeTitle, design: .rounded))
-                        .fontWeight(.black)
-                        .foregroundColor(.orange)
-                        .padding(.bottom)
+                VStack {
+                    // Alert Text
+                    Group {
+                        if !addNewItemViewModel.isNameValid {
+                            ValidationErrorText(text: "Please enter the item name")
+                        }
+                        
+                        if !addNewItemViewModel.isQuantityValid {
+                            ValidationErrorText(text: "Please enter a valid amount")
+                        }
+                    }
                     
-                    Spacer()
+                    // Name Textfield
+                    FormTextField(name: "Name", placeHolder: "Enter new item name", value: $addNewItemViewModel.name)
+                        .padding(.top)
                     
+                    // Category Selection
+                    HStack(spacing: 0) {
+                        VStack(alignment: .leading) {
+                            
+                            Text("Category")
+                                .font(.system(.subheadline, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundColor(.primary)
+
+                            
+                            NavigationLink(destination: CategoryFormView(value: $addNewItemViewModel.category), isActive: $isNavigationLinkActive) {
+                                Button(action: {
+                                    self.isNavigationLinkActive = true
+                                }) {
+                                    Text(addNewItemViewModel.category.categoryString)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(addNewItemViewModel.category.color)
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 16)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(addNewItemViewModel.category.color, lineWidth: 1)
+                                        )
+                                        .frame(height: 44)
+                                }
+                            }
+                        }
+                        .padding(.top)
+                        
+                        Spacer()
+                    }
+
+                    // Amount Textfield
+                    FormAmountField(name: "Amount", placeHolder: "1", value: $addNewItemViewModel.quantity)
+                        .padding(.top)
+                    
+                    // Dates
+                    VStack(alignment: .leading) {
+                        FormDateField(name: "Purchase Date", value: $addNewItemViewModel.purchaseDate)
+                            .padding(.bottom)
+                        
+                        FormDateField(name: "Expired Date", value: $addNewItemViewModel.expiredDate)
+                            .padding(.bottom)
+                    }
+                    .padding(.top)
+                    
+                    // Memo
+                    FormTextEditor(name: "Memo (Optional)", value: $addNewItemViewModel.memo)
+                        .padding(.top)
+                    
+                    // Save Button
                     Button {
+                        self.saveItem()
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundColor(.secondary)
-                            .font(.title)
-                    }
-                }
-                
-                // Alert Text
-                Group {
-                    if !addNewItemViewModel.isNameValid {
-                        ValidationErrorText(text: "Please enter the item name")
-                    }
-                    
-                    if !addNewItemViewModel.isQuantityValid {
-                        ValidationErrorText(text: "Please enter a valid amount")
-                    }
-                }
-                
-                // Name Textfield
-                FormTextField(name: "Name", placeHolder: "Enter new item name", value: $addNewItemViewModel.name)
-                    .padding(.top)
-                
-                // Category Selection
-                VStack(alignment: .leading) {
-                    Text("Category")
-                        .font(.system(.subheadline, design: .rounded))
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                    //.padding(.vertical, 10)
-                    
-                    HStack(spacing: 10) {
-                        Button {
-                            self.addNewItemViewModel.type = .fridge
-                        } label: {
-                            Text("Fridge")
-                                .font(.headline)
-                                .foregroundColor(self.addNewItemViewModel.type == .fridge ? Color.white : Color.primary)
-                        }
-                        .frame(minWidth: 0.0, maxWidth: .infinity)
-                        .padding()
-                        .background(self.addNewItemViewModel.type == .fridge ? Color.orange : Color(.systemBackground))
-                        .cornerRadius(10)
-                        
-                        Button {
-                            self.addNewItemViewModel.type = .freezer
-                        } label: {
-                            Text("Freezer")
-                                .font(.headline)
-                                .foregroundColor(self.addNewItemViewModel.type == .freezer ? Color.white : Color.primary)
-                        }
-                        .frame(minWidth: 0.0, maxWidth: .infinity)
-                        .padding()
-                        .background(self.addNewItemViewModel.type == .freezer ? Color.orange : Color(.systemBackground))
-                        .cornerRadius(10)
-                        
-                        Button {
-                            self.addNewItemViewModel.type = .others
-                        } label: {
-                            Text("Others")
-                                .font(.headline)
-                                .foregroundColor(self.addNewItemViewModel.type == .others ? Color.white : Color.primary)
-                        }
-                        .frame(minWidth: 0.0, maxWidth: .infinity)
-                        .padding()
-                        .background(self.addNewItemViewModel.type == .others ? Color.orange : Color(.systemBackground))
-                        .cornerRadius(10)
-                    }
-                }
-                .padding(.top)
-                
-                // Amount Textfield
-                FormAmountField(name: "Amount", placeHolder: "1", value: $addNewItemViewModel.quantity)
-                    .padding(.top)
-                
-                // Dates
-                VStack(alignment: .leading) {
-                    FormDateField(name: "Purchase Date", value: $addNewItemViewModel.purchaseDate)
-                        .padding(.bottom)
-                    
-                    FormDateField(name: "Expired Date", value: $addNewItemViewModel.expiredDate)
-                        .padding(.bottom)
-                }
-                .padding(.top)
-                
-                // Memo
-                FormTextEditor(name: "Memo (Optional)", value: $addNewItemViewModel.memo)
-                    .padding(.top)
-                
-                // Save Button
-                
-                Button {
-                    self.saveItem()
-                    self.presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("Save")
-                        .font(.system(.headline, design: .rounded))
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(.mint)
-                        .cornerRadius(10, antialiased: true)
-                }
-                .padding()
-                
-                // Delete Button
-                if showingDeleteButton {
-                    Button {
-                        if let item = newItem {
-                            self.deleteItem(item)
-                        }
-                        self.presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Delete")
+                        Text("Save")
                             .font(.system(.headline, design: .rounded))
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .padding()
                             .foregroundColor(.white)
-                            .background(.gray)
+                            .background(.mint)
                             .cornerRadius(10, antialiased: true)
                     }
                     .padding()
+                    
+                    // Delete Button
+                    if showingDeleteButton {
+                        Button {
+                            if let item = newItem {
+                                self.deleteItem(item)
+                            }
+                            self.presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Text("Delete")
+                                .font(.system(.headline, design: .rounded))
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(.gray)
+                                .cornerRadius(10, antialiased: true)
+                        }
+                        .padding()
+                    }
                 }
+                .padding()
             }
-            .padding()
+            .navigationBarTitle("New Item")
         }
     }
     
@@ -170,7 +145,7 @@ struct AddNewItemView: View {
     private func saveItem() {
         let newItem = newItem ?? ItemModel(context: context)
         newItem.itemId = UUID()
-        newItem.type = addNewItemViewModel.type
+        newItem.category = addNewItemViewModel.category
         newItem.name = addNewItemViewModel.name
         newItem.quantity = Double(addNewItemViewModel.quantity)!
         newItem.purchaseDate = addNewItemViewModel.purchaseDate
@@ -339,7 +314,6 @@ struct FormTextEditor: View {
                 .font(.headline)
                 .foregroundColor(.primary)
                 .submitLabel(.done)
-            //                .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 1).foregroundColor(.gray))
         }
     }
 }

@@ -8,14 +8,8 @@
 import Foundation
 import CoreData
 
-enum ItemStoreType: Int {
-    case fridge = 0
-    case freezer = 1
-    case others = 2
-}
-
 public class ItemModel: NSManagedObject {
-    @NSManaged public var typeNum: Int32
+    @NSManaged public var categoryNum: Int32
     @NSManaged public var itemId: UUID
     @NSManaged public var name: String
     @NSManaged public var quantity: Double
@@ -25,13 +19,14 @@ public class ItemModel: NSManagedObject {
 }
 
 extension ItemModel: Identifiable {
-    var type: ItemStoreType {
+    
+    var category: ItemCategory {
         get {
-            return ItemStoreType(rawValue: Int(typeNum)) ?? .fridge
+            return ItemCategory(rawValue: Int(categoryNum)) ?? .vegetables
         }
         
         set {
-            self.typeNum = Int32(newValue.rawValue)
+            self.categoryNum = Int32(newValue.rawValue)
         }
     }
 }

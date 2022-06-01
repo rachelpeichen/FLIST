@@ -11,13 +11,12 @@ import Combine
 class AddNewItemViewModel: ObservableObject {
     
     // Input
-    @Published var type = ItemStoreType.fridge
+    @Published var category = ItemCategory.others
     @Published var name = ""
     @Published var quantity = ""
     @Published var purchaseDate: Date?
     @Published var expiredDate: Date?
     @Published var memo = ""
-    // TODO: 沒設計到菜肉水果這種類別ＱＱ想看怎用較好之後用？
     
     // Output
     @Published var isNameValid = false
@@ -28,7 +27,7 @@ class AddNewItemViewModel: ObservableObject {
     
     init(itemModel: ItemModel?) {
         
-        self.type = itemModel?.type ?? .fridge
+        self.category = itemModel?.category ?? .vegetables
         self.name = itemModel?.name ?? ""
         self.quantity = "\(itemModel?.quantity ?? 1.0)"
         self.purchaseDate = itemModel?.purchaseDate

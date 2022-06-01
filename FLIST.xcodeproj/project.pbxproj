@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D1162F452816934800792358 /* AddNewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1162F442816934800792358 /* AddNewItemView.swift */; };
+		D1300C9D2833BDFA00122349 /* ItemCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1300C9C2833BDFA00122349 /* ItemCategory.swift */; };
 		D13177BF27FD318B004C6BDC /* FLISTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13177BE27FD318B004C6BDC /* FLISTApp.swift */; };
 		D13177C127FD318B004C6BDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13177C027FD318B004C6BDC /* ContentView.swift */; };
 		D13177C327FD318C004C6BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13177C227FD318C004C6BDC /* Assets.xcassets */; };
@@ -24,6 +25,8 @@
 		D174E199281D02A700CEDBC1 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174E198281D02A600CEDBC1 /* Binding+Extension.swift */; };
 		D174E19B281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174E19A281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift */; };
 		D192459027FF165000F22DF5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192458F27FF165000F22DF5 /* SearchBar.swift */; };
+		D1942B1F2845FC4B00991586 /* CategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1942B1E2845FC4B00991586 /* CategoryFormView.swift */; };
+		D1942B212846405900991586 /* ItemCategoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1942B202846405900991586 /* ItemCategoryFilterView.swift */; };
 		D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA622800639700997AB5 /* ShoppingItemModel.swift */; };
 		D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */; };
 		D194DA6728006AC500997AB5 /* AddNewShoppingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */; };
@@ -52,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		D1162F442816934800792358 /* AddNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemView.swift; sourceTree = "<group>"; };
+		D1300C9C2833BDFA00122349 /* ItemCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategory.swift; sourceTree = "<group>"; };
 		D13177BB27FD318B004C6BDC /* FLIST.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLIST.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13177BE27FD318B004C6BDC /* FLISTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLISTApp.swift; sourceTree = "<group>"; };
 		D13177C027FD318B004C6BDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 		D174E198281D02A600CEDBC1 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		D174E19A281D36F600CEDBC1 /* AddNewShoppingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewShoppingItemViewModel.swift; sourceTree = "<group>"; };
 		D192458F27FF165000F22DF5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		D1942B1E2845FC4B00991586 /* CategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormView.swift; sourceTree = "<group>"; };
+		D1942B202846405900991586 /* ItemCategoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategoryFilterView.swift; sourceTree = "<group>"; };
 		D194DA622800639700997AB5 /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
 		D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewShoppingItemView.swift; sourceTree = "<group>"; };
@@ -220,6 +226,8 @@
 			children = (
 				D1C0F9DF27FEC82300E642E1 /* MainView.swift */,
 				D1162F442816934800792358 /* AddNewItemView.swift */,
+				D1942B1E2845FC4B00991586 /* CategoryFormView.swift */,
+				D1942B202846405900991586 /* ItemCategoryFilterView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -238,6 +246,7 @@
 				D194DA622800639700997AB5 /* ShoppingItemModel.swift */,
 				D174E1872819376D00CEDBC1 /* ItemModel.swift */,
 				D174E18C28193D8700CEDBC1 /* Persistence.swift */,
+				D1300C9C2833BDFA00122349 /* ItemCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -382,14 +391,17 @@
 				D174E1932819492900CEDBC1 /* AddNewItemViewModel.swift in Sources */,
 				D174E197281CDF5A00CEDBC1 /* NumberFormatter+Extension.swift in Sources */,
 				D1C0F9DC27FEC3F700E642E1 /* ShoppingListView.swift in Sources */,
+				D1942B1F2845FC4B00991586 /* CategoryFormView.swift in Sources */,
 				D174E18D28193D8700CEDBC1 /* Persistence.swift in Sources */,
 				D1C0F9E027FEC82300E642E1 /* MainView.swift in Sources */,
 				D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */,
 				D174E199281D02A700CEDBC1 /* Binding+Extension.swift in Sources */,
+				D1942B212846405900991586 /* ItemCategoryFilterView.swift in Sources */,
 				D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */,
 				D1C0F9DE27FEC4E000E642E1 /* SettingsView.swift in Sources */,
 				D1162F452816934800792358 /* AddNewItemView.swift in Sources */,
 				D13177C127FD318B004C6BDC /* ContentView.swift in Sources */,
+				D1300C9D2833BDFA00122349 /* ItemCategory.swift in Sources */,
 				D13177BF27FD318B004C6BDC /* FLISTApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

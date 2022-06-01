@@ -21,7 +21,7 @@ struct PersistenceController {
             let newItem = ItemModel(context: viewContext)
             newItem.itemId = UUID()
             newItem.name = "Item #\(index)"
-            newItem.type = index % 2 == 0 ? .fridge : .freezer
+            newItem.category = index % 2 == 0 ? .vegetables : .fruits
             newItem.quantity = 1.0
             newItem.purchaseDate = .today
             newItem.expiredDate = .tomorrow
