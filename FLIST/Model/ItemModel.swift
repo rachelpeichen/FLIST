@@ -29,4 +29,23 @@ extension ItemModel: Identifiable {
             self.categoryNum = Int32(newValue.rawValue)
         }
     }
+    
+    static func predicate(with categories: [ItemCategory], searchText: String) -> NSPredicate? {
+        var predicates = [NSPredicate]()
+        
+        if !categories.isEmpty {
+            let categoriesInt = categories.map { $0.rawValue }
+            predicates.append(NSPredicate(format: "categoryNum == %@", categoriesInt.description))
+        }
+        
+        if !searchText.isEmpty {
+            predicates.append(NSPredicate(format: "name CONTAINS[cd] %@", searchText.lowercased()))
+        }
+        
+        if predicates.isEmpty {
+            return nil
+        } else {
+            return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        }
+    }
 }

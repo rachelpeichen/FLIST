@@ -22,7 +22,7 @@ struct PersistenceController {
             newItem.itemId = UUID()
             newItem.name = "Item #\(index)"
             newItem.category = index % 2 == 0 ? .vegetables : .fruits
-            newItem.quantity = 1.0
+            newItem.quantity = Double(index)
             newItem.purchaseDate = .today
             newItem.expiredDate = .tomorrow
         }

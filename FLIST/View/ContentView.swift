@@ -10,7 +10,7 @@ import CoreData
 
 struct ContentView: View {
     
-    @Environment(\.managedObjectContext) var context
+    //@Environment(\.managedObjectContext) var context
     
     @State private var selectedTag = 1
 

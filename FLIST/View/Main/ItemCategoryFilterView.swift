@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ItemCategoryFilterView: View {
     
-    @Binding var selectedCategories:  Set<ItemCategory>
+    @Binding var selectedCategories: Set<ItemCategory>
     private let categories = ItemCategory.allCases
     
     var body: some View {

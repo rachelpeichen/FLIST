@@ -20,7 +20,6 @@ struct CategoryFormView: View {
                     Text(category.categoryString)
                     Spacer()
                 }
-                .background(.orange)
                 .onTapGesture {
                     self.value = category
                     self.presentationMode.wrappedValue.dismiss()

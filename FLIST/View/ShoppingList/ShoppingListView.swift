@@ -17,7 +17,7 @@ struct ShoppingListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \ShoppingItemModel.priorityNum, ascending: false)]
     )
     
-    var shoppingItems: FetchedResults<ShoppingItemModel>
+    var shoppingItemsFetchedResult: FetchedResults<ShoppingItemModel>
     
     @State private var showingAddShoppingItemView = false
     
@@ -43,7 +43,7 @@ struct ShoppingListView: View {
                 .padding()
                 
                 List {
-                    ForEach(shoppingItems) { shoppingItem in
+                    ForEach(shoppingItemsFetchedResult) { shoppingItem in
                         ShoppingListCellView(shoppingItem: shoppingItem)
                     }
                     .onDelete(perform: deleteTask(indexSet:))
@@ -51,7 +51,7 @@ struct ShoppingListView: View {
             }
             
             // If there is no data, show an empty view
-            if shoppingItems.count == 0 {
+            if shoppingItemsFetchedResult.count == 0 {
                 NoDataView()
             }
             
@@ -69,7 +69,7 @@ struct ShoppingListView: View {
     
     private func deleteTask(indexSet: IndexSet) {
         for index in indexSet {
-            let itemToDelete = shoppingItems[index]
+            let itemToDelete = shoppingItemsFetchedResult[index]
             context.delete(itemToDelete)
         }
         

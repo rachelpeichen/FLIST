@@ -27,6 +27,7 @@
 		D192459027FF165000F22DF5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192458F27FF165000F22DF5 /* SearchBar.swift */; };
 		D1942B1F2845FC4B00991586 /* CategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1942B1E2845FC4B00991586 /* CategoryFormView.swift */; };
 		D1942B212846405900991586 /* ItemCategoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1942B202846405900991586 /* ItemCategoryFilterView.swift */; };
+		D1942B232847516600991586 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1942B222847516600991586 /* ItemListView.swift */; };
 		D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA622800639700997AB5 /* ShoppingItemModel.swift */; };
 		D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */; };
 		D194DA6728006AC500997AB5 /* AddNewShoppingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */; };
@@ -77,6 +78,7 @@
 		D192458F27FF165000F22DF5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D1942B1E2845FC4B00991586 /* CategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormView.swift; sourceTree = "<group>"; };
 		D1942B202846405900991586 /* ItemCategoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategoryFilterView.swift; sourceTree = "<group>"; };
+		D1942B222847516600991586 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		D194DA622800639700997AB5 /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
 		D194DA6628006AC500997AB5 /* AddNewShoppingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewShoppingItemView.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				D1162F442816934800792358 /* AddNewItemView.swift */,
 				D1942B1E2845FC4B00991586 /* CategoryFormView.swift */,
 				D1942B202846405900991586 /* ItemCategoryFilterView.swift */,
+				D1942B222847516600991586 /* ItemListView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				D174E18D28193D8700CEDBC1 /* Persistence.swift in Sources */,
 				D1C0F9E027FEC82300E642E1 /* MainView.swift in Sources */,
 				D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */,
+				D1942B232847516600991586 /* ItemListView.swift in Sources */,
 				D174E199281D02A700CEDBC1 /* Binding+Extension.swift in Sources */,
 				D1942B212846405900991586 /* ItemCategoryFilterView.swift in Sources */,
 				D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */,
