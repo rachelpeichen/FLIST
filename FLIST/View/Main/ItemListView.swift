@@ -10,7 +10,7 @@ import CoreData
 
 struct ItemListView: View {
     
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @FetchRequest(
         entity: ItemModel.entity(),
@@ -18,8 +18,6 @@ struct ItemListView: View {
     )
     
     private var itemFetchResult: FetchedResults<ItemModel>
-    
-    @State private var showingEditItemView = false
     @State var itemToEdit: ItemModel?
     
     // MARK: - Initializer
@@ -30,6 +28,10 @@ struct ItemListView: View {
         if let predicate = predicate {
             fetchRequest.predicate = predicate
         }
+        // MARK: - 這樣寫死是可以的所以應該是 ItemModel Predicate 那邊出問題
+//        } else {
+//            fetchRequest.predicate = NSPredicate(format: "categoryNum == %@", "\(1)")
+//        }
 
         _itemFetchResult = FetchRequest(fetchRequest: fetchRequest)
     }
@@ -39,7 +41,6 @@ struct ItemListView: View {
             ForEach(itemFetchResult) { (item: ItemModel) in
                 Button {
                     self.itemToEdit = item
-                    self.showingEditItemView = true
                 } label: {
                     HStack(spacing: 20) {
                         
@@ -77,7 +78,6 @@ struct ItemListView: View {
             }
             .onDelete(perform: deleteItem(indexSet:))
         }
-        
     }
     
     private func deleteItem(indexSet: IndexSet) {

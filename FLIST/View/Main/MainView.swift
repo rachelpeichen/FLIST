@@ -10,7 +10,7 @@ import CoreData
 
 struct MainView: View {
     
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @State var selectedCategories: Set<ItemCategory> = Set()
     @State var selectedItem: ItemModel?

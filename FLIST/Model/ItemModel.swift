@@ -35,7 +35,9 @@ extension ItemModel: Identifiable {
         
         if !categories.isEmpty {
             let categoriesInt = categories.map { $0.rawValue }
-            predicates.append(NSPredicate(format: "categoryNum == %@", categoriesInt.description))
+            for target in categoriesInt {
+                predicates.append(NSPredicate(format: "categoryNum == %@", target.description))
+            }
         }
         
         if !searchText.isEmpty {
@@ -45,7 +47,7 @@ extension ItemModel: Identifiable {
         if predicates.isEmpty {
             return nil
         } else {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         }
     }
 }

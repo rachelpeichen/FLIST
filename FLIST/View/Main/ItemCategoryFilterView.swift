@@ -18,12 +18,15 @@ struct ItemCategoryFilterView: View {
                 ForEach(categories) { category in
                     FilterButtonView(itemCategory: category,
                                      isSelected: self.selectedCategories.contains(category),
-                                     onTapped: self.onTap)
+                                     onTapped: { tappedCategory in
+                        onTap(category: tappedCategory)
+                    })
                     .padding(.leading, category == self.categories.first ? 16 : 0)
                     .padding(.trailing, category == self.categories.last ? 16 : 0)
                 }
             }
         }
+        .padding(.vertical)
     }
     
     func onTap(category: ItemCategory) {
