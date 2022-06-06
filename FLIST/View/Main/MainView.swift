@@ -13,8 +13,8 @@ struct MainView: View {
     @Environment(\.managedObjectContext) var context
     
     @State var selectedCategories: Set<ItemCategory> = Set()
-    @State private var selectedItem: ItemModel?
-    @State private var showingAddItemView = false
+    @State var selectedItem: ItemModel?
+    @State var showingAddItemView: Bool = false
     @State var searchText: String = ""
     
     var body: some View {
@@ -36,7 +36,7 @@ struct MainView: View {
                         .font(.title)
                 }
                 .sheet(isPresented: $showingAddItemView) {
-                    AddNewItemView(newItem: nil)
+                    AddNewItemView()
                 }
             }
             .padding()

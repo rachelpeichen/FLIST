@@ -16,11 +16,14 @@ struct AddNewItemView: View {
     @State var isNavigationLinkActive = false
     
     var showingDeleteButton: Bool = false
-    var newItem: ItemModel?
+    var itemToEdit: ItemModel?
+    var title: String {
+        itemToEdit == nil ? "Create New Item" : "Edit Item"
+    }
     
-    init(newItem: ItemModel? = nil, showDeleteButton: Bool = false) {
-        self.newItem = newItem
-        self.addNewItemViewModel = AddNewItemViewModel(itemModel: newItem)
+    init(editItem: ItemModel? = nil, showDeleteButton: Bool = false) {
+        self.itemToEdit = editItem
+        self.addNewItemViewModel = AddNewItemViewModel(itemModel: editItem)
         self.showingDeleteButton = showDeleteButton
         
         let navBarAppearance = UINavigationBarAppearance()
@@ -119,7 +122,7 @@ struct AddNewItemView: View {
                     // Delete Button
                     if showingDeleteButton {
                         Button {
-                            if let item = newItem {
+                            if let item = itemToEdit {
                                 self.deleteItem(item)
                             }
                             self.presentationMode.wrappedValue.dismiss()
@@ -137,13 +140,13 @@ struct AddNewItemView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle("New Item")
+            .navigationBarTitle(title)
         }
     }
     
     // Save the item using Core Data
     private func saveItem() {
-        let newItem = newItem ?? ItemModel(context: context)
+        let newItem = itemToEdit ?? ItemModel(context: context)
         newItem.itemId = UUID()
         newItem.category = addNewItemViewModel.category
         newItem.name = addNewItemViewModel.name
@@ -179,7 +182,7 @@ struct AddNewItemView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared.container.viewContext
         let previewItems = ItemModel(context: context)
-        AddNewItemView(newItem: previewItems, showDeleteButton: true)
+        AddNewItemView(editItem: previewItems, showDeleteButton: true)
             .frame(height: nil)
             .previewDevice("iPhone 11")
     }

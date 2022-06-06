@@ -20,7 +20,7 @@ struct ItemListView: View {
     private var itemFetchResult: FetchedResults<ItemModel>
     
     @State private var showingEditItemView = false
-    @State private var selectedItem: ItemModel?
+    @State var itemToEdit: ItemModel?
     
     // MARK: - Initializer
     init(predicate: NSPredicate?, sortDescriptor: NSSortDescriptor) {
@@ -38,8 +38,8 @@ struct ItemListView: View {
         List {
             ForEach(itemFetchResult) { (item: ItemModel) in
                 Button {
+                    self.itemToEdit = item
                     self.showingEditItemView = true
-                    self.selectedItem = item
                 } label: {
                     HStack(spacing: 20) {
                         
@@ -69,9 +69,10 @@ struct ItemListView: View {
                     }
                 }
                 .frame(height: 45)
-                .sheet(isPresented: self.$showingEditItemView) {
-                    AddNewItemView(newItem: self.selectedItem, showDeleteButton: true)
-                        .environment(\.managedObjectContext, self.context)
+                .sheet(item: $itemToEdit, onDismiss: {
+                    self.itemToEdit = nil
+                }) { (item: ItemModel) in
+                    AddNewItemView(editItem: item, showDeleteButton: true)
                 }
             }
             .onDelete(perform: deleteItem(indexSet:))
