@@ -16,6 +16,18 @@
 		D13177D027FD318C004C6BDC /* FLISTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13177CF27FD318C004C6BDC /* FLISTTests.swift */; };
 		D13177DA27FD318C004C6BDC /* FLISTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13177D927FD318C004C6BDC /* FLISTUITests.swift */; };
 		D13177DC27FD318C004C6BDC /* FLISTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13177DB27FD318C004C6BDC /* FLISTUITestsLaunchTests.swift */; };
+		D138698D284F2F4800C1D8EB /* SortSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D138698C284F2F4800C1D8EB /* SortSelectorView.swift */; };
+		D138698F284F2F7500C1D8EB /* SortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D138698E284F2F7500C1D8EB /* SortModel.swift */; };
+		D1386993284F400A00C1D8EB /* ThemeColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1386992284F400A00C1D8EB /* ThemeColors.xcassets */; };
+		D1386996284F404200C1D8EB /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1386995284F404200C1D8EB /* Theme.swift */; };
+		D1386998284F446800C1D8EB /* ThemeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1386997284F446800C1D8EB /* ThemeDefinitions.swift */; };
+		D138699A284F472900C1D8EB /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1386999284F472900C1D8EB /* ThemeManager.swift */; };
+		D138699C284F477000C1D8EB /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D138699B284F477000C1D8EB /* UserSetting.swift */; };
+		D13869A1284F4FAA00C1D8EB /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13869A0284F4FAA00C1D8EB /* NavigationBarModifier.swift */; };
+		D13869A628508A9500C1D8EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13869A428508A9400C1D8EB /* Localizable.strings */; };
+		D13869A928508A9D00C1D8EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13869A728508A9D00C1D8EB /* Localizable.strings */; };
+		D13869AC285096B600C1D8EB /* LocalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13869AB285096B600C1D8EB /* LocalizationModel.swift */; };
+		D13869AE2850A07700C1D8EB /* LanguageFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13869AD2850A07700C1D8EB /* LanguageFormView.swift */; };
 		D174E1882819376D00CEDBC1 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174E1872819376D00CEDBC1 /* ItemModel.swift */; };
 		D174E18B281939F700CEDBC1 /* FLIST.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D174E189281939F700CEDBC1 /* FLIST.xcdatamodeld */; };
 		D174E18D28193D8700CEDBC1 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174E18C28193D8700CEDBC1 /* Persistence.swift */; };
@@ -67,6 +79,18 @@
 		D13177D527FD318C004C6BDC /* FLISTUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FLISTUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13177D927FD318C004C6BDC /* FLISTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLISTUITests.swift; sourceTree = "<group>"; };
 		D13177DB27FD318C004C6BDC /* FLISTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLISTUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D138698C284F2F4800C1D8EB /* SortSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSelectorView.swift; sourceTree = "<group>"; };
+		D138698E284F2F7500C1D8EB /* SortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModel.swift; sourceTree = "<group>"; };
+		D1386992284F400A00C1D8EB /* ThemeColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ThemeColors.xcassets; sourceTree = "<group>"; };
+		D1386995284F404200C1D8EB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D1386997284F446800C1D8EB /* ThemeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDefinitions.swift; sourceTree = "<group>"; };
+		D1386999284F472900C1D8EB /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		D138699B284F477000C1D8EB /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
+		D13869A0284F4FAA00C1D8EB /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
+		D13869A528508A9400C1D8EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		D13869A828508A9D00C1D8EB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = Localizable.strings; sourceTree = "<group>"; };
+		D13869AB285096B600C1D8EB /* LocalizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationModel.swift; sourceTree = "<group>"; };
+		D13869AD2850A07700C1D8EB /* LanguageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageFormView.swift; sourceTree = "<group>"; };
 		D174E1872819376D00CEDBC1 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		D174E18A281939F700CEDBC1 /* FLIST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FLIST.xcdatamodel; sourceTree = "<group>"; };
 		D174E18C28193D8700CEDBC1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -116,6 +140,8 @@
 		D13177B227FD318B004C6BDC = {
 			isa = PBXGroup;
 			children = (
+				D13869A328508A5C00C1D8EB /* zh-Hant.lproj */,
+				D13869A228508A3900C1D8EB /* en.lproj */,
 				D13177BD27FD318B004C6BDC /* FLIST */,
 				D13177CE27FD318C004C6BDC /* FLISTTests */,
 				D13177D827FD318C004C6BDC /* FLISTUITests */,
@@ -136,6 +162,7 @@
 		D13177BD27FD318B004C6BDC /* FLIST */ = {
 			isa = PBXGroup;
 			children = (
+				D138699D284F4DA500C1D8EB /* Modifiers */,
 				D13177BE27FD318B004C6BDC /* FLISTApp.swift */,
 				D174E18E2819456200CEDBC1 /* Extension */,
 				D194DA612800637D00997AB5 /* Model */,
@@ -171,6 +198,50 @@
 				D13177DB27FD318C004C6BDC /* FLISTUITestsLaunchTests.swift */,
 			);
 			path = FLISTUITests;
+			sourceTree = "<group>";
+		};
+		D1386994284F401500C1D8EB /* Theme Model */ = {
+			isa = PBXGroup;
+			children = (
+				D1386992284F400A00C1D8EB /* ThemeColors.xcassets */,
+				D1386995284F404200C1D8EB /* Theme.swift */,
+				D1386997284F446800C1D8EB /* ThemeDefinitions.swift */,
+				D1386999284F472900C1D8EB /* ThemeManager.swift */,
+			);
+			path = "Theme Model";
+			sourceTree = "<group>";
+		};
+		D138699D284F4DA500C1D8EB /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D13869A0284F4FAA00C1D8EB /* NavigationBarModifier.swift */,
+				D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		D13869A228508A3900C1D8EB /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				D13869A428508A9400C1D8EB /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		D13869A328508A5C00C1D8EB /* zh-Hant.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				D13869A728508A9D00C1D8EB /* Localizable.strings */,
+			);
+			path = "zh-Hant.lproj";
+			sourceTree = "<group>";
+		};
+		D13869AA2850966500C1D8EB /* Localization Model */ = {
+			isa = PBXGroup;
+			children = (
+				D13869AB285096B600C1D8EB /* LocalizationModel.swift */,
+			);
+			path = "Localization Model";
 			sourceTree = "<group>";
 		};
 		D174E18E2819456200CEDBC1 /* Extension */ = {
@@ -217,7 +288,6 @@
 		D192459527FF30F800F22DF5 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				D194DA64280067BB00997AB5 /* CheckBoxStyle.swift */,
 				D192458F27FF165000F22DF5 /* SearchBar.swift */,
 			);
 			path = Custom;
@@ -231,6 +301,7 @@
 				D1942B1E2845FC4B00991586 /* CategoryFormView.swift */,
 				D1942B202846405900991586 /* ItemCategoryFilterView.swift */,
 				D1942B222847516600991586 /* ItemListView.swift */,
+				D138698C284F2F4800C1D8EB /* SortSelectorView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -239,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				D1C0F9DD27FEC4E000E642E1 /* SettingsView.swift */,
+				D13869AD2850A07700C1D8EB /* LanguageFormView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -246,10 +318,14 @@
 		D194DA612800637D00997AB5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D13869AA2850966500C1D8EB /* Localization Model */,
+				D1386994284F401500C1D8EB /* Theme Model */,
 				D194DA622800639700997AB5 /* ShoppingItemModel.swift */,
 				D174E1872819376D00CEDBC1 /* ItemModel.swift */,
 				D174E18C28193D8700CEDBC1 /* Persistence.swift */,
 				D1300C9C2833BDFA00122349 /* ItemCategory.swift */,
+				D138698E284F2F7500C1D8EB /* SortModel.swift */,
+				D138699B284F477000C1D8EB /* UserSetting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,6 +416,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = D13177B227FD318B004C6BDC;
 			productRefGroup = D13177BC27FD318B004C6BDC /* Products */;
@@ -358,6 +435,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D13869A928508A9D00C1D8EB /* Localizable.strings in Resources */,
+				D1386993284F400A00C1D8EB /* ThemeColors.xcassets in Resources */,
+				D13869A628508A9500C1D8EB /* Localizable.strings in Resources */,
 				D13177C627FD318C004C6BDC /* Preview Assets.xcassets in Resources */,
 				D13177C327FD318C004C6BDC /* Assets.xcassets in Resources */,
 			);
@@ -385,7 +465,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D174E1882819376D00CEDBC1 /* ItemModel.swift in Sources */,
+				D13869AC285096B600C1D8EB /* LocalizationModel.swift in Sources */,
 				D194DA6928009AA000997AB5 /* BackgroundView.swift in Sources */,
+				D1386998284F446800C1D8EB /* ThemeDefinitions.swift in Sources */,
+				D13869AE2850A07700C1D8EB /* LanguageFormView.swift in Sources */,
 				D194DA6728006AC500997AB5 /* AddNewShoppingItemView.swift in Sources */,
 				D192459027FF165000F22DF5 /* SearchBar.swift in Sources */,
 				D174E18B281939F700CEDBC1 /* FLIST.xcdatamodeld in Sources */,
@@ -394,19 +477,25 @@
 				D174E1932819492900CEDBC1 /* AddNewItemViewModel.swift in Sources */,
 				D174E197281CDF5A00CEDBC1 /* NumberFormatter+Extension.swift in Sources */,
 				D1C0F9DC27FEC3F700E642E1 /* ShoppingListView.swift in Sources */,
+				D138698F284F2F7500C1D8EB /* SortModel.swift in Sources */,
 				D1942B1F2845FC4B00991586 /* CategoryFormView.swift in Sources */,
 				D174E18D28193D8700CEDBC1 /* Persistence.swift in Sources */,
 				D1C0F9E027FEC82300E642E1 /* MainView.swift in Sources */,
+				D138698D284F2F4800C1D8EB /* SortSelectorView.swift in Sources */,
 				D194DA632800639700997AB5 /* ShoppingItemModel.swift in Sources */,
 				D1942B232847516600991586 /* ItemListView.swift in Sources */,
+				D1386996284F404200C1D8EB /* Theme.swift in Sources */,
 				D174E199281D02A700CEDBC1 /* Binding+Extension.swift in Sources */,
 				D1942B212846405900991586 /* ItemCategoryFilterView.swift in Sources */,
 				D194DA65280067BB00997AB5 /* CheckBoxStyle.swift in Sources */,
 				D1C0F9DE27FEC4E000E642E1 /* SettingsView.swift in Sources */,
 				D1162F452816934800792358 /* AddNewItemView.swift in Sources */,
 				D13177C127FD318B004C6BDC /* ContentView.swift in Sources */,
+				D138699C284F477000C1D8EB /* UserSetting.swift in Sources */,
 				D1300C9D2833BDFA00122349 /* ItemCategory.swift in Sources */,
 				D13177BF27FD318B004C6BDC /* FLISTApp.swift in Sources */,
+				D13869A1284F4FAA00C1D8EB /* NavigationBarModifier.swift in Sources */,
+				D138699A284F472900C1D8EB /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +530,25 @@
 			targetProxy = D13177D627FD318C004C6BDC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D13869A428508A9400C1D8EB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D13869A528508A9400C1D8EB /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D13869A728508A9D00C1D8EB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D13869A828508A9D00C1D8EB /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D13177DD27FD318C004C6BDC /* Debug */ = {

@@ -1,31 +1,29 @@
 //
-//  CategoryFormView.swift
+//  LanguageFormView.swift
 //  FLIST
 //
-//  Created by Rachel Chen on 2022/5/31.
+//  Created by Rachel Chen on 2022/6/8.
 //
 
 import SwiftUI
 
-struct CategoryFormView: View {
+struct LanguageFormView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Binding var value: ItemCategory
-    
+    @EnvironmentObject var userSetting: UserSetting
+
     var body: some View {
         List {
-            ForEach(ItemCategory.allCases) { category in
-                
+            ForEach(Localication.allCases) { local in
                 HStack {
-                    Text(category.icon)
-                    Text(category.categoryString)
+                    Text(local.displayedLanguage.rawValue)
                         .font(.system(.body, design: .rounded))
                         .foregroundColor(.primary)
                     Spacer()
                 }
                 .frame(height: 40)
                 .onTapGesture {
-                    self.value = category
+                    userSetting.selectedLanguage = local
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
@@ -33,9 +31,8 @@ struct CategoryFormView: View {
     }
 }
 
-struct CategoryFormView_Previews: PreviewProvider {
+struct LanguageFormView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewItemCategory = ItemCategory.fruits
-        CategoryFormView(value: .constant(previewItemCategory))
+        LanguageFormView()
     }
 }

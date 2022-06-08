@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItemCategoryFilterView: View {
     
+    @EnvironmentObject var userSetting: UserSetting
     @Binding var selectedCategories: Set<ItemCategory>
     private let categories = ItemCategory.allCases
     
@@ -26,7 +27,6 @@ struct ItemCategoryFilterView: View {
                 }
             }
         }
-        .padding(.vertical)
     }
     
     func onTap(category: ItemCategory) {
@@ -38,7 +38,15 @@ struct ItemCategoryFilterView: View {
     }
 }
 
+struct ItemCategoryFilterView_Previews: PreviewProvider {
+    static var previews: some View {
+        ItemCategoryFilterView(selectedCategories: .constant(Set())).environmentObject(UserSetting())
+    }
+}
+
 struct FilterButtonView: View {
+    
+    @EnvironmentObject var userSetting: UserSetting
     
     var itemCategory: ItemCategory
     var isSelected: Bool
@@ -51,6 +59,8 @@ struct FilterButtonView: View {
             HStack(spacing: 8) {
                 Text(itemCategory.categoryString)
                     .fixedSize(horizontal: true, vertical: true)
+                    .font(.system(.subheadline, design: .rounded))
+                    .foregroundColor(isSelected ? Color(userSetting.selectedTheme.primaryColor) : .secondary)
                 
                 if isSelected {
                     Image(systemName: "xmark.circle.fill")
@@ -58,18 +68,11 @@ struct FilterButtonView: View {
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 16)
-                
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(isSelected ? itemCategory.color : Color(UIColor.lightGray), lineWidth: 1))
-                .frame(height: 44)
+                    .stroke(isSelected ? Color(userSetting.selectedTheme.primaryColor) : Color(UIColor.lightGray), lineWidth: 1))
+                .frame(height: 40)
         }
-        .foregroundColor(isSelected ? itemCategory.color : Color(UIColor.gray))
-    }
-}
-
-struct ItemCategoryFilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemCategoryFilterView(selectedCategories: .constant(Set()))
+        .foregroundColor(isSelected ? Color(userSetting.selectedTheme.primaryColor) : .secondary)
     }
 }

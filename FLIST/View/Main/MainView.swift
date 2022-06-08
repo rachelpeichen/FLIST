@@ -12,19 +12,27 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    @State var selectedCategories: Set<ItemCategory> = Set()
-    @State var selectedItem: ItemModel?
+    @EnvironmentObject var userSetting: UserSetting
+    
     @State var showingAddItemView: Bool = false
+    
     @State var searchText: String = ""
     
+    @State var selectedCategories: Set<ItemCategory> = Set()
+    @State var selectedItem: ItemModel?
+    
+    @State var sortType: SortType = SortType.expiredDate
+    @State var sortOrder: SortOrder = SortOrder.descending
+
     var body: some View {
         VStack {
             // Header View
             HStack {
-                Text("My Storage")
+                Text("Grocery Inventory")
                     .font(.system(.title, design: .rounded))
-                    .foregroundColor(Color.orange)
+                    .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                     .bold()
+                    .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                 
                 Spacer()
                 
@@ -32,7 +40,7 @@ struct MainView: View {
                     showingAddItemView.toggle()
                 } label : {
                     Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.orange)
+                        .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                         .font(.title)
                 }
                 .sheet(isPresented: $showingAddItemView) {
@@ -44,15 +52,15 @@ struct MainView: View {
             // Search
             SearchBar(text: $searchText)
                 .padding(.bottom)
-            Divider()
             
-            // TODO: 現在不會 crash 但沒法分類
             // Filter
             ItemCategoryFilterView(selectedCategories: $selectedCategories)
-            Divider()
+            
+            // Sort Selector
+            SortSelectorView(sortType: $sortType, sortOrder: $sortOrder)
             
             // Item List View
-            ItemListView(predicate: ItemModel.predicate(with: Array(selectedCategories), searchText: searchText), sortDescriptor: NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: false))
+            ItemListView(predicate: ItemModel.predicate(with: Array(selectedCategories), searchText: searchText), sortDescriptor: ItemSort(sortType: sortType, sortOrder: sortOrder).sortDescriptor)
         }
     }
 }
@@ -61,6 +69,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView().environmentObject(UserSetting())
     }
 }

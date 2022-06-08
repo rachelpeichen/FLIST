@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  FLIST
+
+  Created by Rachel Chen on 2022/6/8.
+  
+*/
+
+// Main View
+"Grocery Inventory" = "雜貨清單";
+
+// Settings View
+"Settings" = "設定";
+"Theme Color" = "主題顏色";
+"App Language" = "語言";

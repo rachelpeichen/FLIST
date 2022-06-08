@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     
+    @EnvironmentObject var userSetting: UserSetting
     @State private var selectedTag = 1
 
     var body: some View {
@@ -36,13 +37,14 @@ struct ContentView: View {
                     Text("Settings")
                 }
             }
-            .accentColor(Color.orange)
+            .accentColor(Color(userSetting.selectedTheme.primaryColor))
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(UserSetting())
+            .environment(\.locale, .init(identifier: "en"))
     }
 }

@@ -14,7 +14,7 @@ struct ItemListView: View {
     
     @FetchRequest(
         entity: ItemModel.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: false)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: true)]
     )
     
     private var itemFetchResult: FetchedResults<ItemModel>
@@ -28,10 +28,6 @@ struct ItemListView: View {
         if let predicate = predicate {
             fetchRequest.predicate = predicate
         }
-        // MARK: - 這樣寫死是可以的所以應該是 ItemModel Predicate 那邊出問題
-//        } else {
-//            fetchRequest.predicate = NSPredicate(format: "categoryNum == %@", "\(1)")
-//        }
 
         _itemFetchResult = FetchRequest(fetchRequest: fetchRequest)
     }
@@ -44,14 +40,7 @@ struct ItemListView: View {
                 } label: {
                     HStack(spacing: 20) {
                         
-                        Image(item.category.icon)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 8)
-                            .foregroundColor(item.category.color)
-                            .background(item.category.color.opacity(0.1))
-                            .cornerRadius(18)
+                        Text(item.category.icon)
                         
                         VStack(alignment: .leading) {
                             Text(item.name)
@@ -69,6 +58,7 @@ struct ItemListView: View {
                             .foregroundColor(.primary)
                     }
                 }
+                .buttonStyle(PlainButtonStyle())
                 .frame(height: 45)
                 .sheet(item: $itemToEdit, onDismiss: {
                     self.itemToEdit = nil
@@ -98,6 +88,7 @@ struct ItemListView: View {
 
 struct ItemListView_Previews: PreviewProvider {
     static var previews: some View {
-        return ItemListView(predicate: nil, sortDescriptor: NSSortDescriptor(keyPath: \ItemModel.expiredDate, ascending: false)).environment(\.managedObjectContext, PersistenceController.itemPreview.container.viewContext)
+        let sortDescriptor = ItemSort(sortType: .expiredDate, sortOrder: .descending).sortDescriptor
+        return ItemListView(predicate: nil, sortDescriptor: sortDescriptor).environment(\.managedObjectContext, PersistenceController.itemPreview.container.viewContext)
     }
 }

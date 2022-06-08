@@ -9,11 +9,92 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @EnvironmentObject var userSetting: UserSetting
+    
+    @State var selectedTheme: Int = 0
+    @State var isNavigationLinkActive = false
+    
+    let columns = [GridItem(.adaptive(minimum: 60), spacing: 10)]
+    
     // MARK: - Body
     var body: some View {
         NavigationView {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-                .navigationTitle("Settings")
+            ScrollView(.vertical, showsIndicators: true) {
+                
+                HStack {
+                    Text("Settings")
+                        .font(.system(.title, design: .rounded))
+                        .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
+                        .bold()
+                        .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
+                    
+                    Spacer()
+                }
+                .padding()
+                
+                VStack {
+                    VStack(alignment: .leading) {
+                        Text("Theme Color")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundColor(.primary)
+                            .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
+                        
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(0..<ThemeManager.themes.count, id: \.self) { theme in
+                                
+                                Button {
+                                    userSetting.selectedThemeAs = theme
+                                    selectedTheme = theme
+                                } label: {
+                                    Text("")
+                                        .frame(width: 60, height: 60)
+                                        .background(Color(ThemeManager.themes[theme].primaryColor))
+                                        .clipShape(Circle())
+                                }
+                                .overlay(alignment: .bottomTrailing) {
+                                    if theme == selectedTheme {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.gray)
+                                            .offset(x: 6, y: 2)
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                    .padding()
+                    
+                    VStack(alignment: .leading) {
+                        
+                        HStack {
+                            Text("App Language")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.primary)
+                                .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: LanguageFormView(), isActive: $isNavigationLinkActive) {
+                                Button(action: {
+                                    self.isNavigationLinkActive = true
+                                }) {
+                                    Text(userSetting.selectedLanguage.displayedLanguage.rawValue)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
+                                    
+                                    Image(systemName: "chevron.forward")
+                                        .padding()
+                                }
+                                .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
+                            }
+                        }
+                    }
+                    .padding()
+                    
+                }
+            }
+            .navigationTitle("")
+            .navigationBarHidden(true)
         }
     }
     
@@ -30,6 +111,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView().environmentObject(UserSetting())
     }
 }
+

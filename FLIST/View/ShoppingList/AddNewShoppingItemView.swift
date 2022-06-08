@@ -5,10 +5,13 @@
 //  Created by Rachel Chen on 2022/4/8.
 //
 
-// 588 頁現在看到
 import SwiftUI
 
 struct AddNewShoppingItemView: View {
+    
+    @EnvironmentObject var dataSource: UserSetting
+    
+    @Environment(\.colorScheme) var colorScheme
     
     @Environment(\.managedObjectContext) var context
     
@@ -31,8 +34,8 @@ struct AddNewShoppingItemView: View {
                 HStack {
                     Text("Add a new shopping item")
                         .font(.system(.title, design: .rounded))
-                        .fontWeight(.black)
-                        .foregroundColor(.orange)
+                        .bold()
+                        .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
                     
                     Spacer()
                     
@@ -40,7 +43,7 @@ struct AddNewShoppingItemView: View {
                         isShowing = false
                     } label: {
                         Image(systemName: "x.circle.fill")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
                             .font(.title)
                     }
                 }
@@ -58,40 +61,43 @@ struct AddNewShoppingItemView: View {
                 
                 HStack {
                     
+                    // High Priority Button
                     Button {
                         self.addNewShoppingItemViewModel.priority = .high
                     } label: {
                         Text("High")
                             .lineLimit(1)
-                            .font(.headline)
+                            .font(.body)
                             .foregroundColor(self.addNewShoppingItemViewModel.priority == .high ? Color.white : Color.primary)
                     }
                     .padding()
-                    .background(self.addNewShoppingItemViewModel.priority == .high ? Color.red : Color(.systemGray6))
+                    .background(self.addNewShoppingItemViewModel.priority == .high ? Color("HighPriorityColor") : Color(.systemGray6))
                     .cornerRadius(10)
                     
+                    // Nomal Priority Button
                     Button {
                         self.addNewShoppingItemViewModel.priority = .normal
                     } label: {
                         Text("Normal")
                             .lineLimit(1)
-                            .font(.headline)
+                            .font(.body)
                             .foregroundColor(self.addNewShoppingItemViewModel.priority == .normal ? Color.white : Color.primary)
                     }
                     .padding()
-                    .background(self.addNewShoppingItemViewModel.priority == .normal ? Color.orange : Color(.systemGray6))
+                    .background(self.addNewShoppingItemViewModel.priority == .normal ? Color("MediumPriorityColor") : Color(.systemGray6))
                     .cornerRadius(10)
                     
+                    // Low Priority Button
                     Button {
                         self.addNewShoppingItemViewModel.priority = .low
                     } label: {
                         Text("Low")
                             .lineLimit(1)
-                            .font(.headline)
+                            .font(.body)
                             .foregroundColor(self.addNewShoppingItemViewModel.priority == .low ? Color.white : Color.primary)
                     }
                     .padding()
-                    .background(self.addNewShoppingItemViewModel.priority == .low ? Color.green : Color(.systemGray6))
+                    .background(self.addNewShoppingItemViewModel.priority == .low ? Color("LowPriorityColor") : Color(.systemGray6))
                     .cornerRadius(10)
                 }
                 .padding(.bottom)
@@ -100,23 +106,18 @@ struct AddNewShoppingItemView: View {
                 Button {
                     self.saveShoppingItem()
                     self.isShowing = false
-                    // TODO: 有輸入文字再儲存
-//                    if self.$addNewShoppingItemViewModel.name.trimmingCharacters(in: .whitespaces) == "" {
-//                        return
-//                    }
-                    
                 } label: {
                     Text("Save")
                         .font(.system(.headline, design: .rounded))
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(.mint)
+                        .background(Color(dataSource.selectedTheme.primaryColor))
                         .cornerRadius(10, antialiased: true)
                 }
             }
             .padding()
-            .background(.white)
+            .background(colorScheme == .light ? .white: Color(.systemGray6))
             .cornerRadius(10, antialiased: true)
         }
     }

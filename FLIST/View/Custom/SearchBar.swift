@@ -9,17 +9,20 @@ import SwiftUI
 
 struct SearchBar: View {
     
-    // MARK: - Parameters
+    @EnvironmentObject var dataSource: UserSetting
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var text: String
     @State private var isEditing = false
     
-    // MARK: - Body
     var body: some View {
         HStack {
             TextField("Search For Items", text: $text)
+                .font(.system(.subheadline, design: .rounded))
+                .foregroundColor(.primary)
                 .padding(7)
                 .padding(.horizontal, 25)
-                .background(Color(.systemGray6))
+                .background(colorScheme == .light ? Color(.systemGray6): Color(.systemGray4))
                 .cornerRadius(8)
                 .overlay(
                     HStack {
@@ -33,7 +36,7 @@ struct SearchBar: View {
                                 self.text = ""
                             } label: {
                                 Image(systemName: "multiply.circle.fill")
-                                    .foregroundColor(.orange)
+                                    .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
                                     .padding(.trailing, 8)
                             }
                         }

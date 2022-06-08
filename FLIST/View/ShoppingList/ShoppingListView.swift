@@ -10,6 +10,8 @@ import CoreData
 
 struct ShoppingListView: View {
     
+    @EnvironmentObject var dataSource: UserSetting
+    
     @Environment(\.managedObjectContext) var context
     
     @FetchRequest(
@@ -27,7 +29,7 @@ struct ShoppingListView: View {
                 HStack {
                     Text("Shopping List")
                         .font(.system(.title, design: .rounded))
-                        .foregroundColor(Color.orange)
+                        .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
                         .bold()
                     
                     Spacer()
@@ -36,7 +38,7 @@ struct ShoppingListView: View {
                         showingAddShoppingItemView.toggle()
                     } label : {
                         Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.orange)
+                            .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
                             .font(.title)
                     }
                 }
@@ -86,7 +88,7 @@ struct ShoppingListView: View {
 // MARK: - Previews
 struct ShoppingListView_Previews: PreviewProvider {
     static var previews: some View {
-        ShoppingListView().environment(\.managedObjectContext, PersistenceController.shoppingItemPreview.container.viewContext)
+        ShoppingListView().environment(\.managedObjectContext, PersistenceController.shoppingItemPreview.container.viewContext).environmentObject(UserSetting())
     }
 }
 
@@ -109,15 +111,17 @@ struct ShoppingListCellView: View {
         Toggle(isOn: self.$shoppingItem.isComplete) {
             HStack {
                 Text(self.shoppingItem.name)
-                    .strikethrough(self.shoppingItem.isComplete, color: .black)
+                    .foregroundColor(.primary)
+                    .strikethrough(self.shoppingItem.isComplete, color: .primary)
                 
                 Spacer()
                 
                 Circle()
-                    .frame(width: 15, height: 15)
+                    .frame(width: 10, height: 10)
                     .foregroundColor(self.setColor(for: self.shoppingItem.priority))
                 
             }
+            .frame(height: 45)
         }
         .toggleStyle(CheckboxStyle())
             .onChange(of: shoppingItem) { newValue in
@@ -129,9 +133,9 @@ struct ShoppingListCellView: View {
     
     private func setColor(for priority: Priority) -> Color {
         switch priority {
-        case .high: return .red
-        case .normal: return .orange
-        case .low: return .green
+        case .high: return Color("HighPriorityColor")
+        case .normal: return Color("MediumPriorityColor")
+        case .low: return Color("LowPriorityColor")
         }
     }
 }

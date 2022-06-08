@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 enum ItemCategory: Int, CaseIterable {
+    
     case vegetables = 0
     case fruits
     case meat
@@ -46,46 +47,23 @@ enum ItemCategory: Int, CaseIterable {
     var icon: String {
         switch self {
         case .vegetables:
-            return "veg"
+            return "🥦"
         case .fruits:
-            return "fruit"
+            return "🍎"
         case .others:
-            return "cart"
+            return "🍴"
         case .meat:
-            return "heart.circle.fill"
+            return "🍖"
         case .fish:
-            return "heart.circle.fill"
+            return "🐟"
         case .bread:
-            return "heart.circle.fill"
+            return "🍞"
         case .beverage:
-            return "heart.circle.fill"
+            return "🧃"
         case .diary:
-            return "heart.circle.fill"
+            return "🥛"
         case .snack:
-            return "heart.circle.fill"
-        }
-    }
-    
-    var color: Color {
-        switch self {
-        case .vegetables:
-            return .green
-        case .fruits:
-            return .pink
-        case .others:
-            return .blue
-        case .meat:
-            return .brown
-        case .fish:
-            return .gray
-        case .bread:
-            return .gray
-        case .beverage:
-            return .gray
-        case .diary:
-            return .gray
-        case .snack:
-            return .gray
+            return "🍪"
         }
     }
 }

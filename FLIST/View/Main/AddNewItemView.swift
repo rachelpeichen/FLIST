@@ -12,7 +12,10 @@ struct AddNewItemView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var userSetting: UserSetting
+    
     @ObservedObject private var addNewItemViewModel: AddNewItemViewModel
+    
     @State var isNavigationLinkActive = false
     
     var showingDeleteButton: Bool = false
@@ -25,28 +28,16 @@ struct AddNewItemView: View {
         self.itemToEdit = editItem
         self.addNewItemViewModel = AddNewItemViewModel(itemModel: editItem)
         self.showingDeleteButton = showDeleteButton
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemMint, .font: UIFont(name: "ArialRoundedMTBold", size: 30)!]
-        UINavigationBar.appearance().standardAppearance = navBarAppearance
     }
 
     var body: some View {
-        
-        
         NavigationView {
-            
             ScrollView(.vertical, showsIndicators: true) {
-                
                 VStack {
                     // Alert Text
                     Group {
                         if !addNewItemViewModel.isNameValid {
                             ValidationErrorText(text: "Please enter the item name")
-                        }
-                        
-                        if !addNewItemViewModel.isQuantityValid {
-                            ValidationErrorText(text: "Please enter a valid amount")
                         }
                     }
                     
@@ -68,14 +59,15 @@ struct AddNewItemView: View {
                                 Button(action: {
                                     self.isNavigationLinkActive = true
                                 }) {
+                                    Text(addNewItemViewModel.category.icon)
                                     Text(addNewItemViewModel.category.categoryString)
                                         .font(.system(.body, design: .rounded))
-                                        .foregroundColor(addNewItemViewModel.category.color)
+                                        .foregroundColor(.primary)
                                         .padding(.vertical, 8)
                                         .padding(.horizontal, 16)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 16)
-                                                .stroke(addNewItemViewModel.category.color, lineWidth: 1)
+                                                .stroke(.gray, lineWidth: 1)
                                         )
                                         .frame(height: 44)
                                 }
@@ -114,7 +106,7 @@ struct AddNewItemView: View {
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .padding()
                             .foregroundColor(.white)
-                            .background(.mint)
+                            .background(Color(userSetting.selectedTheme.primaryColor))
                             .cornerRadius(10, antialiased: true)
                     }
                     .padding()
@@ -140,7 +132,9 @@ struct AddNewItemView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle(title)
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarModifier(textColor: userSetting.selectedTheme.primaryColor)
         }
     }
     
@@ -184,21 +178,22 @@ struct AddNewItemView_Previews: PreviewProvider {
         let previewItems = ItemModel(context: context)
         AddNewItemView(editItem: previewItems, showDeleteButton: true)
             .frame(height: nil)
-            .previewDevice("iPhone 11")
+            .environmentObject(UserSetting())
     }
 }
 
 // MARK: - Extracted Views
 
 struct ValidationErrorText: View {
+    
+    @EnvironmentObject var dataSource: UserSetting
     var iconName = "info.circle"
-    var iconColor = Color(red: 251/255, green: 128/255, blue: 128/255)
     var text = ""
     
     var body: some View {
         HStack {
             Image(systemName: iconName)
-                .foregroundColor(iconColor)
+                .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
             Text(text)
                 .font(.system(.body, design: .rounded))
                 .foregroundColor(.secondary)
@@ -211,6 +206,7 @@ struct FormTextField: View {
     let name: String
     var placeHolder: String
     
+    @Environment(\.colorScheme) var colorScheme
     @Binding var value: String
     
     var body: some View {
@@ -224,7 +220,7 @@ struct FormTextField: View {
                 .font(.headline)
                 .foregroundColor(.primary)
                 .padding()
-                .background(Color(.systemGray6))
+                .background(colorScheme == .light ? Color(.systemGray6): Color(.systemGray4))
                 .cornerRadius(10)
                 .submitLabel(.done)
         }
@@ -235,8 +231,8 @@ struct FormAmountField: View {
     let name: String
     var placeHolder: String
     
+    @Environment(\.colorScheme) var colorScheme
     @Binding var value: String
-    //    @FocusState var isInputActive: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -249,18 +245,9 @@ struct FormAmountField: View {
                 .font(.headline)
                 .foregroundColor(.primary)
                 .padding()
-                .background(Color(.systemGray6))
+                .background(colorScheme == .light ? Color(.systemGray6): Color(.systemGray4))
                 .cornerRadius(10)
                 .keyboardType(.decimalPad)
-            // 現在要加 done 這沒用不知為何 舊方法又麻煩
-            //                .focused($isInputActive)
-            //                .toolbar {
-            //                    ToolbarItem(placement: .keyboard) {
-            //                        Button("Done") {
-            //                            isInputActive = false
-            //                        }
-            //                    }
-            //                }
         }
     }
 }
@@ -268,26 +255,31 @@ struct FormAmountField: View {
 struct FormDateField: View {
     let name: String
     
+    @EnvironmentObject var dataSource: UserSetting
     @Binding var value: Date?
     @State var showDatePicker = false
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack() {
                 Text(name)
                     .font(.system(.subheadline, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 Toggle("", isOn: $showDatePicker)
-                    .toggleStyle(SwitchToggleStyle(tint: .mint))
+                    .toggleStyle(SwitchToggleStyle(tint: Color(dataSource.selectedTheme.primaryColor)))
                     .font(.system(.subheadline, design: .rounded))
             }
+            
+            Text(value?.asString() ?? "")
+                .font(.system(.subheadline, design: .rounded))
+                .foregroundColor(.primary)
             
             if showDatePicker {
                 HStack {
                     Spacer()
                     DatePicker("", selection: Binding<Date>(get: {self.value ?? Date()}, set: {self.value = $0}), displayedComponents: .date)
-                        .accentColor(.orange)
+                        .accentColor(Color(dataSource.selectedTheme.primaryColor))
                         .padding(10)
                         .cornerRadius(10)
                         .labelsHidden()
