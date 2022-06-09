@@ -32,7 +32,7 @@ struct AddNewShoppingItemView: View {
                 
                 // Header Bar
                 HStack {
-                    Text("Add a new shopping item")
+                    Text("Add New Grocery Item")
                         .font(.system(.title, design: .rounded))
                         .bold()
                         .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
@@ -50,7 +50,7 @@ struct AddNewShoppingItemView: View {
                 .padding(.bottom)
                 
                 // Name TextField
-                FormTextField(name: "Name", placeHolder: "Enter new item name", value: $addNewShoppingItemViewModel.name)
+                FormTextField(name: "Name", placeHolder: "Enter grocery item name", value: $addNewShoppingItemViewModel.name)
                 
                 // Priority Selection
                 Text("Priority")

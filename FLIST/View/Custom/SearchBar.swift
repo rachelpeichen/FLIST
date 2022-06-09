@@ -17,7 +17,7 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            TextField("Search For Items", text: $text)
+            TextField(LocalizedStringKey("Search For Grocery Items"), text: $text)
                 .font(.system(.subheadline, design: .rounded))
                 .foregroundColor(.primary)
                 .padding(7)

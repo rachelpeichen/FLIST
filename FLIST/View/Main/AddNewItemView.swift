@@ -20,9 +20,6 @@ struct AddNewItemView: View {
     
     var showingDeleteButton: Bool = false
     var itemToEdit: ItemModel?
-    var title: String {
-        itemToEdit == nil ? "Create New Item" : "Edit Item"
-    }
     
     init(editItem: ItemModel? = nil, showDeleteButton: Bool = false) {
         self.itemToEdit = editItem
@@ -37,14 +34,14 @@ struct AddNewItemView: View {
                     // Alert Text
                     Group {
                         if !addNewItemViewModel.isNameValid {
-                            ValidationErrorText(text: "Please enter the item name")
+                            ValidationErrorText(text: "Please enter grocery item name")
                         }
                     }
                     
                     // Name Textfield
-                    FormTextField(name: "Name", placeHolder: "Enter new item name", value: $addNewItemViewModel.name)
+                    FormTextField(name: "Name", placeHolder: "Enter grocery item name", value: $addNewItemViewModel.name)
                         .padding(.top)
-                    
+  
                     // Category Selection
                     HStack(spacing: 0) {
                         VStack(alignment: .leading) {
@@ -53,14 +50,13 @@ struct AddNewItemView: View {
                                 .font(.system(.subheadline, design: .rounded))
                                 .fontWeight(.bold)
                                 .foregroundColor(.primary)
-
                             
                             NavigationLink(destination: CategoryFormView(value: $addNewItemViewModel.category), isActive: $isNavigationLinkActive) {
                                 Button(action: {
                                     self.isNavigationLinkActive = true
                                 }) {
                                     Text(addNewItemViewModel.category.icon)
-                                    Text(addNewItemViewModel.category.categoryString)
+                                    Text(LocalizedStringKey(addNewItemViewModel.category.categoryString))
                                         .font(.system(.body, design: .rounded))
                                         .foregroundColor(.primary)
                                         .padding(.vertical, 8)
@@ -72,6 +68,7 @@ struct AddNewItemView: View {
                                         .frame(height: 44)
                                 }
                             }
+                            .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                         }
                         .padding(.top)
                         
@@ -87,14 +84,15 @@ struct AddNewItemView: View {
                         FormDateField(name: "Purchase Date", value: $addNewItemViewModel.purchaseDate)
                             .padding(.bottom)
                         
-                        FormDateField(name: "Expired Date", value: $addNewItemViewModel.expiredDate)
+                        FormDateField(name: "Expiration Date", value: $addNewItemViewModel.expiredDate)
                             .padding(.bottom)
                     }
                     .padding(.top)
                     
                     // Memo
-                    FormTextEditor(name: "Memo (Optional)", value: $addNewItemViewModel.memo)
+                    FormTextEditor(name: "Memo", value: $addNewItemViewModel.memo)
                         .padding(.top)
+                        .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                     
                     // Save Button
                     Button {
@@ -130,11 +128,13 @@ struct AddNewItemView: View {
                         .padding()
                     }
                 }
+                .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                 .padding()
             }
-            .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
             .navigationBarModifier(textColor: userSetting.selectedTheme.primaryColor)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("")
+            .navigationBarHidden(true)
         }
     }
     
@@ -186,17 +186,20 @@ struct AddNewItemView_Previews: PreviewProvider {
 
 struct ValidationErrorText: View {
     
-    @EnvironmentObject var dataSource: UserSetting
+    @EnvironmentObject var userSetting: UserSetting
     var iconName = "info.circle"
     var text = ""
     
     var body: some View {
         HStack {
             Image(systemName: iconName)
-                .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
-            Text(text)
+                .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
+            
+            Text(LocalizedStringKey(text))
+                .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                 .font(.system(.body, design: .rounded))
                 .foregroundColor(.secondary)
+            
             Spacer()
         }
     }
@@ -211,12 +214,12 @@ struct FormTextField: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name)
+            Text(LocalizedStringKey(name))
                 .font(.system(.subheadline, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
-            
-            TextField(placeHolder, text: $value)
+                
+            TextField(LocalizedStringKey(placeHolder), text: $value)
                 .font(.headline)
                 .foregroundColor(.primary)
                 .padding()
@@ -236,7 +239,7 @@ struct FormAmountField: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name)
+            Text(LocalizedStringKey(name))
                 .font(.system(.subheadline, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
@@ -255,19 +258,20 @@ struct FormAmountField: View {
 struct FormDateField: View {
     let name: String
     
-    @EnvironmentObject var dataSource: UserSetting
+    @EnvironmentObject var userSetting: UserSetting
     @Binding var value: Date?
     @State var showDatePicker = false
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack() {
-                Text(name)
+                Text(LocalizedStringKey(name))
                     .font(.system(.subheadline, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
+                
                 Toggle("", isOn: $showDatePicker)
-                    .toggleStyle(SwitchToggleStyle(tint: Color(dataSource.selectedTheme.primaryColor)))
+                    .toggleStyle(SwitchToggleStyle(tint: Color(userSetting.selectedTheme.primaryColor)))
                     .font(.system(.subheadline, design: .rounded))
             }
             
@@ -279,7 +283,7 @@ struct FormDateField: View {
                 HStack {
                     Spacer()
                     DatePicker("", selection: Binding<Date>(get: {self.value ?? Date()}, set: {self.value = $0}), displayedComponents: .date)
-                        .accentColor(Color(dataSource.selectedTheme.primaryColor))
+                        .accentColor(Color(userSetting.selectedTheme.primaryColor))
                         .padding(10)
                         .cornerRadius(10)
                         .labelsHidden()
@@ -297,11 +301,11 @@ struct FormTextEditor: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name)
+            Text(LocalizedStringKey(name))
                 .font(.system(.subheadline, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
-            
+
             TextEditor(text: $value)
                 .frame(minHeight: height)
                 .colorMultiply(Color(.systemGray6))

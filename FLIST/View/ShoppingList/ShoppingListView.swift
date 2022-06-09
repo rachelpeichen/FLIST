@@ -10,7 +10,7 @@ import CoreData
 
 struct ShoppingListView: View {
     
-    @EnvironmentObject var dataSource: UserSetting
+    @EnvironmentObject var userSetting: UserSetting
     
     @Environment(\.managedObjectContext) var context
     
@@ -27,10 +27,11 @@ struct ShoppingListView: View {
         ZStack {
             VStack {
                 HStack {
-                    Text("Shopping List")
+                    Text("Grocery List")
                         .font(.system(.title, design: .rounded))
-                        .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
+                        .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                         .bold()
+                        .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                     
                     Spacer()
                     
@@ -38,7 +39,7 @@ struct ShoppingListView: View {
                         showingAddShoppingItemView.toggle()
                     } label : {
                         Image(systemName: "plus.circle.fill")
-                            .foregroundColor(Color(dataSource.selectedTheme.primaryColor))
+                            .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                             .font(.title)
                     }
                 }
@@ -94,6 +95,7 @@ struct ShoppingListView_Previews: PreviewProvider {
 
 // MARK: - Extracted Views
 struct NoDataView: View {
+    
     var body: some View {
         Image("empty_package")
             .resizable()

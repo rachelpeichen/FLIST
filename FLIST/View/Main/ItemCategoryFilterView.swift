@@ -57,7 +57,7 @@ struct FilterButtonView: View {
             self.onTapped(itemCategory)
         }) {
             HStack(spacing: 8) {
-                Text(itemCategory.categoryString)
+                Text(LocalizedStringKey(itemCategory.categoryString))
                     .fixedSize(horizontal: true, vertical: true)
                     .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(isSelected ? Color(userSetting.selectedTheme.primaryColor) : .secondary)
@@ -71,7 +71,7 @@ struct FilterButtonView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(isSelected ? Color(userSetting.selectedTheme.primaryColor) : Color(UIColor.lightGray), lineWidth: 1))
-                .frame(height: 40)
+            .frame(height: 40)
         }
         .foregroundColor(isSelected ? Color(userSetting.selectedTheme.primaryColor) : .secondary)
     }

@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tag(0)
                 .tabItem {
                     Image(systemName: "list.bullet")
-                    Text("Shooping List")
+                    Text("Grocery List")
                 }
                 
                 MainView()
@@ -38,6 +38,7 @@ struct ContentView: View {
                 }
             }
             .accentColor(Color(userSetting.selectedTheme.primaryColor))
+            .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
         }
     }
 }

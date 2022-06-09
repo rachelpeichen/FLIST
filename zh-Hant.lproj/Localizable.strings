@@ -7,9 +7,47 @@
 */
 
 // Main View
+"Home" = "主頁";
 "Grocery Inventory" = "雜貨清單";
+"Search For Grocery Items" = "搜尋";
+"Sort By" = "分類";
+"Order By" = "排序";
+
+// Add Item View
+"Please enter grocery item name" = "請輸入名稱";
+"Name" = "名稱";
+"Enter grocery item name" = "輸入名稱";
+"Category" = "類別";
+"Amount" = "數量";
+"Purchase Date" = "購買日期";
+"Expiration Date" = "有效期限";
+"Memo" = "備註";
+"Save" = "儲存";
+"Delete" = "刪除";
+
+// Category
+"Vegetables" = "蔬菜";
+"Fruits" = "水果";
+"Meat" = "肉類";
+"Fish" = "魚類";
+"Bread" = "主食類";
+"Beverage" = "飲料";
+"Diary" = "乳製品";
+"Snack" = "零食";
+"Others" = "其他";
+
+// Shopping List
+"Grocery List" = "採買清單";
+"Add New Grocery Item" = "新增物品";
+"Priority" = "重要程度";
+"High" = "高";
+"Normal" = "普通";
+"Low" = "低";
+
 
 // Settings View
 "Settings" = "設定";
 "Theme Color" = "主題顏色";
 "App Language" = "語言";
+"Share" = "分享";
+"Rate App" = "為 App 評分";

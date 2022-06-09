@@ -46,9 +46,15 @@ struct ItemListView: View {
                             Text(item.name)
                                 .font(.system(.body, design: .rounded))
                                 .foregroundColor(.primary)
-                            Text("Expired Date: \(item.expiredDate?.asString() ?? "No Record")")
-                                .font(.system(.caption, design: .rounded))
-                                .foregroundColor(.gray)
+                            
+                            HStack {
+                                Text(LocalizedStringKey("Expiration Date"))
+                                    .font(.system(.caption, design: .rounded))
+                                    .foregroundColor(.gray)
+                                Text(item.expiredDate?.asString() ?? "No Record")
+                                    .font(.system(.caption, design: .rounded))
+                                    .foregroundColor(.gray)
+                            }
                         }
                         
                         Spacer()
@@ -67,6 +73,12 @@ struct ItemListView: View {
                 }
             }
             .onDelete(perform: deleteItem(indexSet:))
+        }
+        .overlay(alignment: .center) {
+            // If there is no data, show an empty view
+            if itemFetchResult.count == 0 {
+                NoDataView()
+            }
         }
     }
     

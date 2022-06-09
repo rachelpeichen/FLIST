@@ -26,7 +26,6 @@ struct SettingsView: View {
                         .font(.system(.title, design: .rounded))
                         .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                         .bold()
-                        .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                     
                     Spacer()
                 }
@@ -37,7 +36,6 @@ struct SettingsView: View {
                         Text("Theme Color")
                             .font(.system(.body, design: .rounded))
                             .foregroundColor(.primary)
-                            .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                         
                         LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(0..<ThemeManager.themes.count, id: \.self) { theme in
@@ -70,7 +68,6 @@ struct SettingsView: View {
                             Text("App Language")
                                 .font(.system(.body, design: .rounded))
                                 .foregroundColor(.primary)
-                                .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
                             
                             Spacer()
                             
@@ -85,7 +82,6 @@ struct SettingsView: View {
                                     Image(systemName: "chevron.forward")
                                         .padding()
                                 }
-                                .foregroundColor(Color(userSetting.selectedTheme.primaryColor))
                             }
                         }
                     }
@@ -93,6 +89,9 @@ struct SettingsView: View {
                     
                 }
             }
+            .environment(\.locale, .init(identifier: userSetting.selectedLanguage.rawValue))
+            .navigationBarModifier(textColor: userSetting.selectedTheme.primaryColor)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("")
             .navigationBarHidden(true)
         }

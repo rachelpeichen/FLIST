@@ -20,11 +20,11 @@ struct SortSelectorView: View {
     var body: some View {
         
         HStack {
-            Text("Sort by")
+            Text("Sort By")
             .font(.system(.subheadline, design: .rounded))
             .foregroundColor(.secondary)
             
-            Picker(selection: $sortType, label: Text("Sort by")) {
+            Picker(selection: $sortType, label: Text("Sort")) {
                 ForEach(SortType.allCases) { type in
                     Image(systemName: type == .expiredDate ? "calendar" : "number")
                         .tag(type)
@@ -33,7 +33,7 @@ struct SortSelectorView: View {
             .pickerStyle(SegmentedPickerStyle())
             .colorMultiply(Color(userSetting.selectedTheme.primaryColor))
             
-            Text("Order by")
+            Text("Order By")
             .font(.system(.subheadline, design: .rounded))
             .foregroundColor(.secondary)
             

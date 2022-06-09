@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryFormView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var userSetting: UserSetting
     @Binding var value: ItemCategory
     
     var body: some View {
@@ -18,9 +19,11 @@ struct CategoryFormView: View {
                 
                 HStack {
                     Text(category.icon)
-                    Text(category.categoryString)
+                    
+                    Text(LocalizedStringKey(category.categoryString))
                         .font(.system(.body, design: .rounded))
                         .foregroundColor(.primary)
+                    
                     Spacer()
                 }
                 .frame(height: 40)
