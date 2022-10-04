@@ -30,7 +30,7 @@
 "Fruits" = "Fruits";
 "Meat" = "Meat";
 "Fish" = "Fish";
-"Bread" = "Bread";
+"Grains" = "主食類";
 "Beverage" = "Beverage";
 "Diary" = "Diary";
 "Snack" = "Snack";
@@ -43,7 +43,6 @@
 "High" = "High";
 "Normal" = "Normal";
 "Low" = "Low";
-
 
 // Settings View
 "Settings" = "Settings";

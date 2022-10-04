@@ -30,7 +30,9 @@
 "Fruits" = "水果";
 "Meat" = "肉類";
 "Fish" = "魚類";
-"Bread" = "主食類";
+"Grains" = "主食類";
+"Canned Food" = "罐頭";
+"Frozen Food" = "冷凍食品";
 "Beverage" = "飲料";
 "Diary" = "乳製品";
 "Snack" = "零食";
@@ -43,7 +45,6 @@
 "High" = "高";
 "Normal" = "普通";
 "Low" = "低";
-
 
 // Settings View
 "Settings" = "設定";

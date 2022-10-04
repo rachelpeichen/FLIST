@@ -90,7 +90,6 @@
 		D13869AD2850A07700C1D8EB /* LanguageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageFormView.swift; sourceTree = "<group>"; };
 		D13869B52850F90500C1D8EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D13869B72850F90700C1D8EB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		D13869B82851014200C1D8EB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D174E1872819376D00CEDBC1 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		D174E18A281939F700CEDBC1 /* FLIST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FLIST.xcdatamodel; sourceTree = "<group>"; };
 		D174E18C28193D8700CEDBC1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		D1C0F9DB27FEC3F700E642E1 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		D1C0F9DD27FEC4E000E642E1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D1C0F9DF27FEC82300E642E1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D1DAC7AF285221670025B3F4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,8 +400,7 @@
 				en,
 				Base,
 				"zh-Hant",
-				ja,
-				fr,
+				"zh-Hans",
 			);
 			mainGroup = D13177B227FD318B004C6BDC;
 			productRefGroup = D13177BC27FD318B004C6BDC /* Products */;
@@ -521,7 +520,7 @@
 			children = (
 				D13869B52850F90500C1D8EB /* en */,
 				D13869B72850F90700C1D8EB /* zh-Hant */,
-				D13869B82851014200C1D8EB /* fr */,
+				D1DAC7AF285221670025B3F4 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

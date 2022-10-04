@@ -30,7 +30,9 @@
 "Fruits" = "Fruits";
 "Meat" = "Meat";
 "Fish" = "Fish";
-"Bread" = "Bread";
+"Grains" = "Grains";
+"Canned Food" = "Canned Food";
+"Frozen Food" = "Frozen Food";
 "Beverage" = "Beverage";
 "Diary" = "Diary";
 "Snack" = "Snack";

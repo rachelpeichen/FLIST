@@ -10,7 +10,7 @@ import Foundation
 enum Localication: String, CaseIterable {
     case en = "en"
     case zh_Hant = "zh_Hant"
-    case fr = "fr"
+    case zh_Hans = "zh_Hans"
 }
 
 extension Localication: Identifiable {
@@ -24,8 +24,8 @@ extension Localication {
             return .en
         case .zh_Hant:
             return .zh_Hant
-        case .fr:
-            return .fr
+        case .zh_Hans:
+            return .zh_Hans
         }
     }
 }
@@ -34,7 +34,7 @@ extension Localication {
 enum LocalStrings: String, CaseIterable {
     case en = "English"
     case zh_Hant = "繁體中文"
-    case fr = "Français"
+    case zh_Hans = "简体中文"
 }
 
 extension LocalStrings: Identifiable {

@@ -14,12 +14,13 @@ enum ItemCategory: Int, CaseIterable {
     case fruits
     case meat
     case fish
-    case bread
+    case grains
+    case canned
+    case freezer
     case beverage
     case diary
     case snack
     case others
-    
     
     var categoryString: String {
         switch self {
@@ -27,20 +28,24 @@ enum ItemCategory: Int, CaseIterable {
             return "Vegetables"
         case .fruits:
             return "Fruits"
-        case .others:
-            return "Others"
         case .meat:
             return "Meat"
         case .fish:
             return "Fish"
-        case .snack:
-            return "Snack"
-        case .bread:
-            return "Bread"
+        case .grains:
+            return "Grains"
+        case .canned:
+            return "Canned Food"
+        case .freezer:
+            return "Frozen Food"
         case .beverage:
             return "Beverage"
         case .diary:
             return "Diary"
+        case .snack:
+            return "Snack"
+        case .others:
+            return "Others"
         }
     }
     
@@ -50,20 +55,24 @@ enum ItemCategory: Int, CaseIterable {
             return "🥦"
         case .fruits:
             return "🍎"
-        case .others:
-            return "🍴"
         case .meat:
             return "🍖"
         case .fish:
             return "🐟"
-        case .bread:
+        case .grains:
             return "🍞"
+        case .canned:
+            return "🥫"
+        case .freezer:
+            return "❄️"
         case .beverage:
             return "🧃"
         case .diary:
-            return "🥛"
+            return "🧀"
         case .snack:
             return "🍪"
+        case .others:
+            return "🦄"
         }
     }
 }

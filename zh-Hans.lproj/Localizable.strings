@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  FLIST
+
+  Created by Rachel Chen on 2022/6/8.
+  
+*/
+
+// Main View
+"Home" = "主页";
+"Grocery Inventory" = "杂货清单";
+"Search For Grocery Items" = "搜寻";
+"Sort By" = "分类";
+"Order By" = "排序";
+
+// Add Item View
+"Please enter grocery item name" = "请输入名称";
+"Name" = "名称";
+"Enter grocery item name" = "输入名称";
+"Category" = "类别";
+"Amount" = "数量";
+"Purchase Date" = "购买日期";
+"Expiration Date" = "有效期限";
+"Memo" = "备注";
+"Save" = "储存";
+"Delete" = "删除";
+
+// Category
+"Vegetables" = "蔬菜";
+"Fruits" = "水果";
+"Meat" = "肉类";
+"Fish" = "鱼类";
+"Grains" = "主食类";
+"Canned Food" = "罐头";
+"Frozen Food" = "冷冻食品";
+"Beverage" = "饮料";
+"Diary" = "乳制品";
+"Snack" = "零食";
+"Others" = "其他";
+
+// Shopping List
+"Grocery List" = "采买清单";
+"Add New Grocery Item" = "新增物品";
+"Priority" = "重要程度";
+"High" = "高";
+"Normal" = "普通";
+"Low" = "低";
+
+// Settings View
+"Settings" = "设定";
+"Theme Color" = "主题颜色";
+"App Language" = "語言";
+"Share" = "语言";
+"Rate App" = "为 App 评分";

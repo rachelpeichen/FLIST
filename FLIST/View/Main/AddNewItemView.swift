@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddNewItemView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var userSetting: UserSetting
-    
+   
     @ObservedObject private var addNewItemViewModel: AddNewItemViewModel
     
     @State var isNavigationLinkActive = false
@@ -25,6 +27,7 @@ struct AddNewItemView: View {
         self.itemToEdit = editItem
         self.addNewItemViewModel = AddNewItemViewModel(itemModel: editItem)
         self.showingDeleteButton = showDeleteButton
+        UITextView.appearance().backgroundColor = (colorScheme == .light ? .systemGray5: .systemGray)
     }
 
     var body: some View {
@@ -308,7 +311,6 @@ struct FormTextEditor: View {
 
             TextEditor(text: $value)
                 .frame(minHeight: height)
-                .colorMultiply(Color(.systemGray6))
                 .cornerRadius(10)
                 .font(.headline)
                 .foregroundColor(.primary)
